@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Header from 'components/Web/Header';
 import Footer from 'components/Web/Footer';
 import Feature from 'components/Web/Feature';
-import Konfirmasi from 'components/Web/Konfirmasi';
-import Jumbotron from 'components/Web/Jumbotron';
+import Search from 'components/Web/Search';
+import Result from 'components/Web/ResultSearch';
 
 import 'assets/css/animate.min.css';
 import 'assets/css/bootstrap.css';
@@ -17,12 +17,12 @@ class Home extends Component {
     return (
       <React.Fragment>
         <Header />
-        <Jumbotron />
+        <Search />
         <section className="post-area ">
           <div className="container">
             <div className="row justify-content-center d-flex">
               <div className="col-lg-12">
-                <Konfirmasi />
+                <Result rprop={this.props} />
               </div>
             </div>
           </div>

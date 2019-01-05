@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from 'components/Web/Header';
 import Footer from 'components/Web/Footer';
 import Feature from 'components/Web/Feature';
-import Search from 'components/Web/Search';
+import Jumbotron from 'components/Web/Jumbotron';
 import Result from 'components/Web/ResultSearch';
 
 import 'assets/css/animate.min.css';
@@ -17,7 +17,7 @@ class Home extends Component {
     return (
       <React.Fragment>
         <Header />
-        <Search />
+        <Jumbotron />
         <section className="post-area ">
           <div className="container">
             <div className="row justify-content-center d-flex">

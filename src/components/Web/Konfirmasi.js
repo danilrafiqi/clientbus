@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
+import axios from 'axios';
 
 const styles = theme => ({
   root: {
@@ -43,30 +44,55 @@ const styles = theme => ({
 
 class Konfirmasi extends Component {
   state = {
-    id: '',
-    nama: '',
-    bank: '',
-    jumlah_transfer: ''
+    tiket_id: '',
+    nama_pengirim: '',
+    nama_bank_pengirim: '',
+    jumlah_transfer: '',
+    foto: ''
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+  };
+
+  upload = () => {
+    const data = new FormData();
+    data.append('foto', this.state.foto, this.state.foto.name);
+    data.append('tiket_id', this.state.tiket_id);
+    data.append('nama_pengirim', this.state.nama_pengirim);
+    data.append('nama_bank_pengirim', this.state.nama_bank_pengirim);
+    data.append('jumlah_transfer', this.state.jumlah_transfer);
+
+    axios.post(`${process.env.REACT_APP_API}/bukti`, data).then(res => {
+      this.setState({
+        tiket_id: '',
+        nama_pengirim: '',
+        nama_bank_pengirim: '',
+        jumlah_transfer: '',
+        foto: ''
+      });
+    });
+  };
+  handleSelectedFile = event => {
+    this.setState({
+      foto: event.target.files[0]
+    });
   };
   render() {
     const dataForm = [
       {
         title: 'Kode Booking',
-        name: 'id',
-        nilai: this.state.id
+        name: 'tiket_id',
+        nilai: this.state.tiket_id
       },
       {
         title: 'Nama Pemilik Rekening',
-        name: 'nama',
-        nilai: this.state.nama
+        name: 'nama_pengirim',
+        nilai: this.state.nama_pengirim
       },
       {
-        title: 'Bank',
-        name: 'bank',
-        nilai: this.state.bank
+        title: 'Nama Bank Pengirim',
+        name: 'nama_bank_pengirim',
+        nilai: this.state.nama_bank_pengirim
       },
       {
         title: 'Jumlah Transfer',
@@ -99,7 +125,7 @@ class Konfirmasi extends Component {
                     label={datas.title}
                     className={classes.textField}
                     name={datas.name}
-                    value={datas.value}
+                    value={datas.nilai}
                     fullWidth
                     onChange={this.handleChange}
                     margin="normal"
@@ -107,10 +133,10 @@ class Konfirmasi extends Component {
                   />
                 );
               })}
-              <Input type="file" fullWidth />
+              <Input type="file" fullWidth onChange={this.handleSelectedFile} />
               <br />
               <br />
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" onClick={this.upload}>
                 Upload Bukti Transfer
               </Button>
             </form>

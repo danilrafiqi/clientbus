@@ -7,8 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
-import { renderToString } from 'react-dom/server';
-import jsPDF from 'jspdf';
 
 const styles = theme => ({
   listItem: {
@@ -40,26 +38,28 @@ class Review extends React.Component {
     datas: []
   };
 
-  async componentWillMount() {
+  getTiket = async () => {
     const datas = await axios.get(
-      `http://localhost:2018/cari/jadwal/${this.props.match.params.id}`
+      `http://localhost:2018/cari/tiket/e6b7c672-0498-4764-86c8-cd8f2dbcfec6`
     );
     this.setState({
       datas: datas.data[0]
     });
-  }
+  };
 
-  // print = () => {
-  //   const string = renderToString(<Review />);
-  //   const pdf = new jsPDF('p', 'mm', 'a4');
-  //   pdf.fromHTML(string);
-  //   pdf.save('pdf');
-  // };
+  componentWillReceiveProps(nextProps) {
+    console.log('neee', nextProps);
+    this.getTiket();
+  }
 
   render() {
     const { classes } = this.props;
-    const { nama, email, no_hp, no_kursi, book_id } = this.props.data;
     const {
+      nama,
+      email,
+      no_hp,
+      no_kursi,
+      book_id,
       harga,
       kelas_deskripsi,
       kelas_nama,
@@ -78,7 +78,7 @@ class Review extends React.Component {
             <p className={classes.title}>Kode Booking</p>
             <p className={classes.subtitle}>{book_id}</p>
           </Grid>
-          {console.log('da', this.state.datas)}
+          {console.log('state', this.state.datas)}
           <Grid item container xs={12} className={classes.marginTop}>
             <Grid item xs={12} sm={6}>
               <p className={classes.title}>{po_nama}</p>
@@ -133,7 +133,6 @@ class Review extends React.Component {
         </Grid>
         <br />
         <br />
-        {console.log('proppppp', this.props)}
         <List disablePadding>
           <ListItem className={classes.listItem}>
             <ListItemText primary="Total" />

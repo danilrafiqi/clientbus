@@ -16,23 +16,17 @@ class Header extends Component {
             <nav id="nav-menu-container">
               <ul className="nav-menu">
                 <li className="menu-active">
-                  <a href="index.html">Home</a>
+                  <Link to="/">Home</Link>
                 </li>
 
                 <li>
-                  <a href="about-us.html">About Us</a>
+                  <Link to="/about">About</Link>
                 </li>
                 <li>
-                  <a href="category.html">Category</a>
+                  <Link to="/konfirmasi">About</Link>
                 </li>
                 <li>
-                  <a href="price.html">Price</a>
-                </li>
-                <li>
-                  <a href="blog-home.html">Blog</a>
-                </li>
-                <li>
-                  <a href="contact.html">Contact</a>
+                  <Link to="/metodepembayaran">About</Link>
                 </li>
                 <li className="menu-has-children">
                   <a href="">Pages</a>
