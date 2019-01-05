@@ -16,16 +16,16 @@ class Footer extends Component {
                 <h6>Bisku.com</h6>
                 <ul className="footer-nav">
                   <li>
-                    <a href="#">About</a>
+                    <a href="">About</a>
                   </li>
                   <li>
-                    <a href="#">FAQ</a>
+                    <a href="">FAQ</a>
                   </li>
                   <li>
-                    <a href="#">Contact Us</a>
+                    <a href="">Contact Us</a>
                   </li>
                   <li>
-                    <a href="#">Kareer</a>
+                    <a href="">Kareer</a>
                   </li>
                 </ul>
               </div>
@@ -35,16 +35,16 @@ class Footer extends Component {
                 <h6>Social Media</h6>
                 <ul className="footer-nav">
                   <li>
-                    <a href="#">Facebook</a>
+                    <a href="">Facebook</a>
                   </li>
                   <li>
-                    <a href="#">Instragram</a>
+                    <a href="">Instragram</a>
                   </li>
                   <li>
-                    <a href="#">Twitter</a>
+                    <a href="">Twitter</a>
                   </li>
                   <li>
-                    <a href="#">Google +</a>
+                    <a href="">Google +</a>
                   </li>
                 </ul>
               </div>
@@ -60,23 +60,23 @@ class Footer extends Component {
               </div>
             </div>
             <div className="col-lg-3  col-md-12">
-              <div className="row single-footer-widget ">
+              <div className="single-footer-widget ">
                 <h6 className="mb-20">Payments</h6>
                 <ul className="instafeed d-flex flex-wrap">
                   <li>
-                    <img src={bca} alt />
+                    <img src={bca} alt={bca} />
                   </li>
                   <li>
-                    <img src={bri} alt />
+                    <img src={bri} alt={bri} />
                   </li>
                   <li>
-                    <img src={bersama} alt />
+                    <img src={bersama} alt={bersama} />
                   </li>
                   <li>
-                    <img src={bni} alt />
+                    <img src={bni} alt={bni} />
                   </li>
                   <li>
-                    <img src={mandiri} alt />
+                    <img src={mandiri} alt={mandiri} />
                   </li>
                 </ul>
               </div>
@@ -87,7 +87,10 @@ class Footer extends Component {
               {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
               Copyright © All rights reserved | This template is made with{' '}
               <i className="fa fa-heart-o" aria-hidden="true" /> by{' '}
-              <a href="https://colorlib.com" target="_blank">
+              <a
+                href="https://colorlib.com"
+                target="_blank"
+                rel="noopener noreferrer">
                 Colorlib
               </a>
               {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}

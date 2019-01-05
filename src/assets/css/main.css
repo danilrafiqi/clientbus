@@ -1914,6 +1914,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #header #logo img {
   padding: 0;
+  width: 40px;
   margin: 0;
 }
 
@@ -3108,10 +3109,12 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .footer-area .footer-nav li {
   margin-top: 8px;
+  display: block;
 }
 
 .footer-area .footer-nav li a {
   color: #fff;
+  padding:0
 }
 
 .footer-area .footer-nav li a:hover {

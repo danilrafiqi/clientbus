@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import logo from 'assets/img/logo.jpg';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
   render() {
@@ -7,15 +9,16 @@ class Header extends Component {
         <div className="container">
           <div className="row align-items-center justify-content-between d-flex">
             <div id="logo">
-              <a href="index.html">
-                <img src="img/logo.png" alt title />
-              </a>
+              <Link to="/">
+                <img src={logo} alt={logo} title={logo} />
+              </Link>
             </div>
             <nav id="nav-menu-container">
               <ul className="nav-menu">
                 <li className="menu-active">
                   <a href="index.html">Home</a>
                 </li>
+
                 <li>
                   <a href="about-us.html">About Us</a>
                 </li>
@@ -32,7 +35,7 @@ class Header extends Component {
                   <a href="contact.html">Contact</a>
                 </li>
                 <li className="menu-has-children">
-                  <a href>Pages</a>
+                  <a href="">Pages</a>
                   <ul>
                     <li>
                       <a href="elements.html">elements</a>
@@ -46,14 +49,9 @@ class Header extends Component {
                   </ul>
                 </li>
                 <li>
-                  <a className="ticker-btn" href="#">
-                    Signup
-                  </a>
-                </li>
-                <li>
-                  <a className="ticker-btn" href="#">
+                  <Link className="ticker-btn" to="/login">
                     Login
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>

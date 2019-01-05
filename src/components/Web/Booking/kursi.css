@@ -1,0 +1,11 @@
+.enable {
+  background: #17a2b8;
+}
+.disable {
+  background: grey;
+  pointer-events: none;
+  /* cursor: not-allowed !important; */
+}
+.book {
+  background: #4da3ff;
+}
