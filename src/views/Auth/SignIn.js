@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
+import swal from '@sweetalert/with-react';
 
 const styles = theme => ({
   main: {
@@ -61,7 +62,16 @@ class SignIn extends Component {
     };
     axios.post(`${process.env.REACT_APP_API}/auth/signin`, data).then(res => {
       console.log('dadada', res);
+      if (res.data == 'unauthorized') {
+        swal(
+          <div>
+            <p>username or password not valid</p>
+          </div>
+        );
+      }
+
       localStorage.setItem('drcreative', res.data);
+
       // this.props.history.push('/dashboard');
     });
   };

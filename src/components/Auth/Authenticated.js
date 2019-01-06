@@ -9,7 +9,7 @@ class AuthenticatedComponent extends Component {
     super(props);
 
     this.state = {
-      user: undefined
+      user: ''
     };
   }
 
@@ -19,20 +19,23 @@ class AuthenticatedComponent extends Component {
       this.props.history.push('/auth/signin');
     }
 
+    console.log('satu', this.state.user);
     axios
       .get(`${process.env.REACT_APP_API}/auth/getuser`, {
         headers: { Authorization: `Bearer ${jwt}` }
       })
       .then(res => {
-        console.log('ress', res);
+        console.log('add', res.data);
         this.setState({
           user: res.data
         });
+        console.log('dua', this.state.user);
       })
       .catch(err => {
         localStorage.removeItem('drcreative');
-        this.props.history.push('/signin');
+        this.props.history.push('/auth/signin');
       });
+    console.log('tiga', this.state.user);
   };
 
   componentWillMount() {
@@ -40,19 +43,6 @@ class AuthenticatedComponent extends Component {
   }
 
   render() {
-    if (this.state.user === undefined) {
-      return (
-        <LoadingScreen
-          loading={true}
-          bgColor="#f1f1f1"
-          spinnerColor="#9ee5f8"
-          textColor="#676767"
-          logoSrc="/logo.png"
-          text="Here an introduction sentence (Optional)"
-        />
-      );
-    }
-
     return <div>{this.props.children}</div>;
   }
 }

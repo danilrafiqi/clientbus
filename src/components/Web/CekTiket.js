@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Auth from 'components/Auth/Authenticated';
 
 class Search extends Component {
   state = {
@@ -50,12 +49,4 @@ class Search extends Component {
   }
 }
 
-const withAuth = () => {
-  return (
-    <Auth>
-      <Search />
-    </Auth>
-  );
-};
-
-export default withAuth;
+export default Search;
