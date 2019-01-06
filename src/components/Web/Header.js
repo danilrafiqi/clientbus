@@ -23,19 +23,19 @@ class Header extends Component {
                   <Link to="/about">About</Link>
                 </li>
                 <li>
-                  <Link to="/konfirmasi">About</Link>
+                  <Link to="/konfirmasi">Konfirmasi</Link>
                 </li>
                 <li>
-                  <Link to="/metodepembayaran">About</Link>
+                  <Link to="/metodepembayaran">Metode Pembayaran</Link>
                 </li>
                 <li className="menu-has-children">
-                  <a href="">Pages</a>
+                  <a href="">Other</a>
                   <ul>
                     <li>
-                      <a href="elements.html">elements</a>
+                      <Link to="cari/jadwal">Cari Tiket</Link>
                     </li>
                     <li>
-                      <a href="search.html">search</a>
+                      <Link to="cektiket">Cek Tiket</Link>
                     </li>
                     <li>
                       <a href="single.html">single</a>

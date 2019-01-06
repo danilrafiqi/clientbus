@@ -7,8 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
-import { renderToString } from 'react-dom/server';
-import jsPDF from 'jspdf';
 
 const styles = theme => ({
   listItem: {

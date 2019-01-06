@@ -48,7 +48,6 @@ class Review extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log('neee', nextProps);
     this.getTiket();
   }
 
@@ -78,7 +77,6 @@ class Review extends React.Component {
             <p className={classes.title}>Kode Booking</p>
             <p className={classes.subtitle}>{book_id}</p>
           </Grid>
-          {console.log('state', this.state.datas)}
           <Grid item container xs={12} className={classes.marginTop}>
             <Grid item xs={12} sm={6}>
               <p className={classes.title}>{po_nama}</p>

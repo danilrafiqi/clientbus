@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Auth from 'components/Auth/Authenticated';
+
 class Search extends Component {
+  state = {
+    id: ''
+  };
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   render() {
     return (
       <section className="banner-area relative" id="home">
@@ -17,14 +27,16 @@ class Search extends Component {
                     <input
                       type="text"
                       className="form-control"
-                      name="search"
+                      name="id"
                       placeholder="Masukkan Kode Booking"
+                      onChange={this.handleChange}
+                      value={this.state.id}
                     />
                   </div>
                   <div className="col-lg-4 form-cols">
                     <Link
                       className="btn btn-info"
-                      to={`/cektiket/e6b7c672-0498-4764-86c8-cd8f2dbcfec6`}>
+                      to={`/cektiket/${this.state.id}`}>
                       <span className="lnr lnr-magnifier" /> Search
                     </Link>
                   </div>
@@ -38,4 +50,12 @@ class Search extends Component {
   }
 }
 
-export default Search;
+const withAuth = () => {
+  return (
+    <Auth>
+      <Search />
+    </Auth>
+  );
+};
+
+export default withAuth;

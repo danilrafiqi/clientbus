@@ -11,6 +11,7 @@ import CariJadwal from 'views/Web/CariJadwal';
 import Booking from 'views/Web/Booking';
 import Konfirmasi from 'views/Web/Konfirmasi';
 import CekTiket from 'views/Web/CekTiket';
+import SignIn from 'views/Auth/SignIn';
 
 const hist = createBrowserHistory();
 
@@ -28,6 +29,7 @@ ReactDOM.render(
       <Route path="/booking/:id/:tanggal/:plat" component={Booking} />
       <Route path="/konfirmasi" component={Konfirmasi} />
       <Route path="/cektiket" component={CekTiket} />
+      <Route path="/auth/signin" component={SignIn} />
       <Route path="/" component={Home} exact />
       <Route component={NotFound} />
     </Switch>
