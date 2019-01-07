@@ -20,7 +20,6 @@ import uuid from 'uuid/v4';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-import Auth from 'components/Auth/Authenticated';
 
 const styles = theme => ({
   appBar: {
@@ -157,7 +156,7 @@ class Booking extends React.Component {
     const { activeStep } = this.state;
 
     return (
-      <Auth>
+      <React.Fragment>
         <CssBaseline />
         <AppBar position="absolute" color="default" className={classes.appBar}>
           <Toolbar>
@@ -237,7 +236,7 @@ class Booking extends React.Component {
             </React.Fragment>
           </Paper>
         </main>
-      </Auth>
+      </React.Fragment>
     );
   }
 }

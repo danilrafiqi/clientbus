@@ -47,11 +47,6 @@ class Kursi extends Component {
     const jumlah_kursi = await axios.get(
       `http://localhost:2018/bus/plat/${this.props.match.params.plat}`
     );
-    // console.log('kursi leng', jumlah_kursi.data[0].jumlah_kursi);
-    // if (kursi.data.length != 0) {
-    //   jumlah_kursi = kursi.data[0].jumlah_kursi;
-    // }
-    // console.log('jum', jumlah_kursi);
     const get_kursi_dipesan = () => {
       const temp = [];
       kursi.data.map(mykursi => {

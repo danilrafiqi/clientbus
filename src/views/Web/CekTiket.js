@@ -10,7 +10,6 @@ import 'assets/css/font-awesome.min.css';
 import 'assets/css/linearicons.css';
 import 'assets/css/main.css';
 import 'assets/css/nice-select.css';
-import Auth from 'components/Auth/Authenticated';
 
 class CekTiket extends Component {
   render() {
@@ -33,12 +32,4 @@ class CekTiket extends Component {
   }
 }
 
-const withAuth = props => {
-  return (
-    <Auth>
-      <CekTiket />
-    </Auth>
-  );
-};
-
-export default withAuth;
+export default CekTiket;

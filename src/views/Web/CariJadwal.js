@@ -4,7 +4,6 @@ import Footer from 'components/Web/Footer';
 import Feature from 'components/Web/Feature';
 import Search from 'components/Web/Search';
 import Result from 'components/Web/ResultSearch';
-import Auth from 'components/Auth/Authenticated';
 
 import 'assets/css/animate.min.css';
 import 'assets/css/bootstrap.css';
@@ -16,7 +15,7 @@ import 'assets/css/nice-select.css';
 class Home extends Component {
   render() {
     return (
-      <Auth>
+      <React.Fragment>
         <Header />
         <Search />
         <section className="post-area ">
@@ -30,7 +29,7 @@ class Home extends Component {
         </section>
         <Feature />
         <Footer />
-      </Auth>
+      </React.Fragment>
     );
   }
 }

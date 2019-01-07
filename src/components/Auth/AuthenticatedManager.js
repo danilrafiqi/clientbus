@@ -63,7 +63,7 @@ class AuthenticatedAdmin extends Component {
       this.state.user === null
     ) {
       this.props.history.push('/auth/signin', { from: this.props.location });
-    } else if (this.state.hak_akses !== 'petugas') {
+    } else if (this.state.hak_akses !== 'manager') {
       this.props.history.push('/cannotaccess');
     }
     if (this.state.user === 'notvalid') {

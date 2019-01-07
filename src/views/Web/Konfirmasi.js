@@ -4,7 +4,6 @@ import Footer from 'components/Web/Footer';
 import Feature from 'components/Web/Feature';
 import Konfirmasi from 'components/Web/Konfirmasi';
 import Jumbotron from 'components/Web/Jumbotron';
-import Auth from 'components/Auth/Authenticated';
 
 import 'assets/css/animate.min.css';
 import 'assets/css/bootstrap.css';
@@ -34,12 +33,5 @@ class Home extends Component {
     );
   }
 }
-const withAuth = props => {
-  return (
-    <Auth>
-      <Home />
-    </Auth>
-  );
-};
 
-export default withAuth;
+export default Home;

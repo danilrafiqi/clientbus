@@ -18,7 +18,7 @@ import dashboardStyle from 'assets/jss/material-dashboard-react/layouts/dashboar
 
 import image from 'assets/img/sidebar-2.jpg';
 import logo from 'assets/img/reactlogo.png';
-import AuthenticatedPetugas from 'components/Auth/AuthenticatedPetugas';
+import AuthenticatedManager from 'components/Auth/AuthenticatedManager';
 
 const switchRoutes = (
   <Switch>
@@ -69,7 +69,7 @@ class App extends React.Component {
   render() {
     const { classes, ...rest } = this.props;
     return (
-      <AuthenticatedPetugas className={classes.wrapper}>
+      <AuthenticatedManager className={classes.wrapper}>
         <Sidebar
           routes={petugasRoutes}
           logoText={'DRCreative'}
@@ -96,7 +96,7 @@ class App extends React.Component {
           )}
           {this.getRoute() ? <Footer /> : null}
         </div>
-      </AuthenticatedPetugas>
+      </AuthenticatedManager>
     );
   }
 }

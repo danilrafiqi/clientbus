@@ -12,17 +12,17 @@ import Header from 'components/Header/Header.jsx';
 import Footer from 'components/Footer/Footer.jsx';
 import Sidebar from 'components/Sidebar/Sidebar.jsx';
 
-import petugasRoutes from 'routes/petugas.jsx';
+import routes from 'routes/manager.jsx';
 
 import dashboardStyle from 'assets/jss/material-dashboard-react/layouts/dashboardStyle.jsx';
 
 import image from 'assets/img/sidebar-2.jpg';
 import logo from 'assets/img/reactlogo.png';
-import AuthenticatedPetugas from 'components/Auth/AuthenticatedPetugas';
+import AuthenticatedManager from 'components/Auth/AuthenticatedManager';
 
 const switchRoutes = (
   <Switch>
-    {petugasRoutes.map((prop, key) => {
+    {routes.map((prop, key) => {
       if (prop.redirect)
         return <Redirect from={prop.path} to={prop.to} key={key} />;
       return <Route path={prop.path} component={prop.component} key={key} />;
@@ -69,9 +69,9 @@ class App extends React.Component {
   render() {
     const { classes, ...rest } = this.props;
     return (
-      <AuthenticatedPetugas className={classes.wrapper}>
+      <AuthenticatedManager className={classes.wrapper}>
         <Sidebar
-          routes={petugasRoutes}
+          routes={routes}
           logoText={'DRCreative'}
           logo={logo}
           image={image}
@@ -82,7 +82,7 @@ class App extends React.Component {
         />
         <div className={classes.mainPanel} ref="mainPanel">
           <Header
-            routes={petugasRoutes}
+            routes={routes}
             handleDrawerToggle={this.handleDrawerToggle}
             {...rest}
           />
@@ -96,7 +96,7 @@ class App extends React.Component {
           )}
           {this.getRoute() ? <Footer /> : null}
         </div>
-      </AuthenticatedPetugas>
+      </AuthenticatedManager>
     );
   }
 }
