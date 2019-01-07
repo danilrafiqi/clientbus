@@ -72,7 +72,7 @@ class App extends React.Component {
       <IsSuperAdmin className={classes.wrapper}>
         <Sidebar
           routes={superadminRoutes}
-          logoText={'Creative Tim'}
+          logoText={'DRCreative'}
           logo={logo}
           image={image}
           handleDrawerToggle={this.handleDrawerToggle}

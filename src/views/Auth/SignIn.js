@@ -12,7 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
 import swal from '@sweetalert/with-react';
-import { createBrowserHistory } from 'history';
+// import { createBrowserHistory } from 'history';
+import jwtDecode from 'jwt-decode';
 
 const styles = theme => ({
   main: {
@@ -71,11 +72,29 @@ class SignIn extends Component {
         );
       } else {
         localStorage.setItem('drcreative', res.data);
-        this.props.history.push(
-          createBrowserHistory().location.state.from.pathname
-        );
-        // console.log('aaaaa', this.props);
-        // console.log('beofere', createBrowserHistory().location.state.from.pathname);
+        const token = res.data;
+        const user = jwtDecode(token);
+        // console.log('aaa', res.data.hak_akses);
+        switch (user.hak_akses) {
+          case 'superadmin':
+            this.props.history.push('/superadmin');
+            break;
+          case 'admin':
+            this.props.history.push('/admin');
+            break;
+          case 'manager':
+            this.props.history.push('/manager');
+            break;
+          case 'manager_po':
+            this.props.history.push('/manager_po');
+            break;
+          case 'petugas':
+            this.props.history.push('/petugas');
+            break;
+          default:
+            this.props.history.push('/cannotaccess');
+            break;
+        }
       }
     });
   };

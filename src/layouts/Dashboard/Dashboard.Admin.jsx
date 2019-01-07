@@ -72,7 +72,7 @@ class App extends React.Component {
       <AuthenticatedAdmin className={classes.wrapper}>
         <Sidebar
           routes={adminRoutes}
-          logoText={'Creative Tim'}
+          logoText={'DRCreative'}
           logo={logo}
           image={image}
           handleDrawerToggle={this.handleDrawerToggle}
