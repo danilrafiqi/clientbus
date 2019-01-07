@@ -12,12 +12,9 @@ import Booking from 'views/Web/Booking';
 import Konfirmasi from 'views/Web/Konfirmasi';
 import CekTiket from 'views/Web/CekTiket';
 import SignIn from 'views/Auth/SignIn';
+import NotFound from 'components/Web/NotFound/NotFound.js';
 
 const hist = createBrowserHistory();
-
-const NotFound = () => {
-  return <div>not found</div>;
-};
 
 ReactDOM.render(
   <Router history={hist}>

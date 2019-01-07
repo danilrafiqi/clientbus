@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
 import swal from '@sweetalert/with-react';
+import { createBrowserHistory } from 'history';
 
 const styles = theme => ({
   main: {
@@ -68,11 +69,14 @@ class SignIn extends Component {
             <p>username or password not valid</p>
           </div>
         );
+      } else {
+        localStorage.setItem('drcreative', res.data);
+        this.props.history.push(
+          createBrowserHistory().location.state.from.pathname
+        );
+        // console.log('aaaaa', this.props);
+        // console.log('beofere', createBrowserHistory().location.state.from.pathname);
       }
-
-      localStorage.setItem('drcreative', res.data);
-
-      // this.props.history.push('/dashboard');
     });
   };
 

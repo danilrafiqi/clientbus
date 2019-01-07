@@ -18,6 +18,7 @@ import dashboardStyle from 'assets/jss/material-dashboard-react/layouts/dashboar
 
 import image from 'assets/img/sidebar-2.jpg';
 import logo from 'assets/img/reactlogo.png';
+import AuthenticatedAdmin from 'components/Auth/AuthenticatedAdmin';
 
 const switchRoutes = (
   <Switch>
@@ -68,7 +69,7 @@ class App extends React.Component {
   render() {
     const { classes, ...rest } = this.props;
     return (
-      <div className={classes.wrapper}>
+      <AuthenticatedAdmin className={classes.wrapper}>
         <Sidebar
           routes={adminRoutes}
           logoText={'Creative Tim'}
@@ -95,7 +96,7 @@ class App extends React.Component {
           )}
           {this.getRoute() ? <Footer /> : null}
         </div>
-      </div>
+      </AuthenticatedAdmin>
     );
   }
 }

@@ -3,12 +3,13 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
-class AuthenticatedComponent extends Component {
+class isSuperAdmin extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      user: this.getCurrentUser()
+      user: this.getCurrentUser(),
+      hak_akses: this.getHakAkses()
     };
   }
 
@@ -18,7 +19,6 @@ class AuthenticatedComponent extends Component {
 
   setToken = token => {
     localStorage.setItem('drcreative', token);
-    // return token;
   };
   getCurrentUser = () => {
     const token = this.getToken();
@@ -29,14 +29,37 @@ class AuthenticatedComponent extends Component {
     }
   };
 
+  getHakAkses = () => {
+    const token = this.getToken();
+    try {
+      if (token) {
+        const user = jwtDecode(token);
+        console.log('kajjasa', user.hak_akses);
+        return user.hak_akses;
+      }
+    } catch (e) {
+      return 'notvalid';
+    }
+    // return 'undefined';
+  };
+
   renderUser = () => {
     const jwt = this.getToken();
-    if (!jwt || this.state.user === null) {
+    if (
+      !jwt ||
+      this.state.hak_akses === 'undefined' ||
+      this.state.hak_akses === 'notvalid' ||
+      this.state.user === null
+    ) {
       this.props.history.push('/auth/signin', { from: this.props.location });
+    } else if (this.state.hak_akses != 'superadmin') {
+      this.props.history.push('/cannotaccess');
     }
     if (this.state.user === 'notvalid') {
       this.props.history.push('/tokennotvalid');
     }
+
+    console.log('sasasas', this.state.hak_akses);
     axios
       .get(`${process.env.REACT_APP_API}/auth/getuser`, {
         headers: { Authorization: `Bearer ${jwt}` }
@@ -54,11 +77,12 @@ class AuthenticatedComponent extends Component {
 
   componentWillMount() {
     this.renderUser();
+    console.log('hakajska', this.state.hak_akses);
   }
 
   render() {
-    return this.props.children;
+    return <div>{this.props.children}</div>;
   }
 }
 
-export default withRouter(AuthenticatedComponent);
+export default withRouter(isSuperAdmin);
