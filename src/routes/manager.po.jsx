@@ -1,10 +1,11 @@
 // @material-ui/icons
 import Dashboard from '@material-ui/icons/Dashboard';
-import Person from '@material-ui/icons/Person';
 // import ContentPaste from "@material-ui/icons/ContentPaste";
 
 // core components/views
 import DashboardPage from 'views/ManagerPo/Dashboard.jsx';
+import UserProfile from 'views/Dashboard/UserProfile.jsx';
+import Person from '@material-ui/icons/Person';
 
 const dashboardRoutes = [
   {
@@ -13,6 +14,13 @@ const dashboardRoutes = [
     navbarName: 'Material Dashboard',
     icon: Dashboard,
     component: DashboardPage
+  },
+  {
+    path: '/manager-po/profile',
+    sidebarName: 'User Profile',
+    navbarName: 'Profile',
+    icon: Person,
+    component: UserProfile
   },
   {
     redirect: true,

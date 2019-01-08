@@ -7,6 +7,8 @@ import Rute from 'views/Admin/Rute/RuteList';
 import Agen from 'views/Admin/Agen/AgenList';
 import Tujuan from 'views/Admin/Tujuan/TujuanList';
 import Jadwal from 'views/Admin/Jadwal/JadwalList';
+import UserProfile from 'views/Dashboard/UserProfile.jsx';
+import Person from '@material-ui/icons/Person';
 
 const dashboardRoutes = [
   {
@@ -15,6 +17,14 @@ const dashboardRoutes = [
     navbarName: 'Material Dashboard',
     icon: Dashboard,
     component: UpgradeToPro
+  },
+
+  {
+    path: '/admin/profile',
+    sidebarName: 'User Profile',
+    navbarName: 'Profile',
+    icon: Person,
+    component: UserProfile
   },
   {
     path: '/admin/kelas',

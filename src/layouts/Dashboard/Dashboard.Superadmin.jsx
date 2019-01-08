@@ -18,7 +18,7 @@ import dashboardStyle from 'assets/jss/material-dashboard-react/layouts/dashboar
 
 import image from 'assets/img/sidebar-2.jpg';
 import logo from 'assets/img/reactlogo.png';
-import IsSuperAdmin from 'components/Auth/isSuperAdmin';
+import AuthenticatedSuperAdmin from 'components/Auth/AuthenticatedSuperAdmin';
 
 const switchRoutes = (
   <Switch>
@@ -69,7 +69,7 @@ class App extends React.Component {
   render() {
     const { classes, ...rest } = this.props;
     return (
-      <IsSuperAdmin className={classes.wrapper}>
+      <AuthenticatedSuperAdmin className={classes.wrapper}>
         <Sidebar
           routes={superadminRoutes}
           logoText={'DRCreative'}
@@ -96,7 +96,7 @@ class App extends React.Component {
           )}
           {this.getRoute() ? <Footer /> : null}
         </div>
-      </IsSuperAdmin>
+      </AuthenticatedSuperAdmin>
     );
   }
 }

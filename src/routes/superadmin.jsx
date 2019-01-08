@@ -6,7 +6,7 @@ import Person from '@material-ui/icons/Person';
 import Unarchive from '@material-ui/icons/Unarchive';
 // core components/views
 import DashboardPage from 'views/Dashboard/Dashboard.jsx';
-import UserProfile from 'views/UserProfile/UserProfile.jsx';
+import UserProfile from 'views/Dashboard/UserProfile.jsx';
 import Bank from 'views/SuperAdmin/Bank/BankList';
 import Po from 'views/SuperAdmin/Po/PoList';
 
@@ -19,7 +19,7 @@ const dashboardRoutes = [
     component: DashboardPage
   },
   {
-    path: '/superadmin/user',
+    path: '/superadmin/profile',
     sidebarName: 'User Profile',
     navbarName: 'Profile',
     icon: Person,
@@ -39,6 +39,14 @@ const dashboardRoutes = [
     icon: Unarchive,
     component: Po
   },
+  {
+    path: '/superadmin/changepassword',
+    sidebarName: 'Po',
+    navbarName: 'Po',
+    icon: Unarchive,
+    component: Po
+  },
+
   {
     redirect: true,
     path: '/superadmin',
