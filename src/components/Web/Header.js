@@ -28,6 +28,15 @@ class Header extends Component {
                 <li>
                   <Link to="/metodepembayaran">Metode Pembayaran</Link>
                 </li>
+
+                <li>
+                  <Link to="cari/jadwal">Cari Tiket</Link>
+                </li>
+
+                <li>
+                  <Link to="cektiket">Cek Tiket</Link>
+                </li>
+
                 <li className="menu-has-children">
                   <a href="">Other</a>
                   <ul>
@@ -37,13 +46,10 @@ class Header extends Component {
                     <li>
                       <Link to="cektiket">Cek Tiket</Link>
                     </li>
-                    <li>
-                      <a href="single.html">single</a>
-                    </li>
                   </ul>
                 </li>
                 <li>
-                  <Link className="ticker-btn" to="/login">
+                  <Link className="ticker-btn" to="/auth/signin">
                     Login
                   </Link>
                 </li>

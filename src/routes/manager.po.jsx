@@ -12,7 +12,7 @@ import Po from 'views/SuperAdmin/Po/PoList';
 
 const dashboardRoutes = [
   {
-    path: '/manager/dashboard',
+    path: '/managerpo/dashboard',
     sidebarName: 'Dashboard',
     navbarName: 'Material Dashboard',
     icon: Dashboard,
@@ -20,8 +20,8 @@ const dashboardRoutes = [
   },
   {
     redirect: true,
-    path: '/manager',
-    to: '/manager/dashboard',
+    path: '/managerpo',
+    to: '/managerpo/dashboard',
     navbarName: 'Redirect'
   }
 ];
