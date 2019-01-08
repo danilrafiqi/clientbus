@@ -86,7 +86,7 @@ class SignIn extends Component {
             this.props.history.push('/manager');
             break;
           case 'manager_po':
-            this.props.history.push('/manager_po');
+            this.props.history.push('/manager-po');
             break;
           case 'petugas':
             this.props.history.push('/petugas');

@@ -41,20 +41,31 @@ import {
 import dashboardStyle from 'assets/jss/material-dashboard-react/views/dashboardStyle.jsx';
 
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 class Dashboard extends React.Component {
-  state = {
-    value: 0,
-    po: 0,
-    total_tiket_terjual: 0,
-    total_pendapatan: 0,
-    tpbp_label: [],
-    tpbp_value: [],
-    tpbb: {
-      labels: [],
-      series: [[]]
-    }
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: 0,
+      agen: 0,
+      total_tiket_terjual: 0,
+      total_pendapatan: 0,
+      tpbb: {
+        labels: [],
+        series: [[]]
+      },
+      po_id: this.getPoId()
+    };
+  }
+
+  getPoId = () => {
+    const token = localStorage.getItem('drcreative');
+    const tokenDecode = jwtDecode(token);
+    return tokenDecode.po;
   };
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -63,20 +74,13 @@ class Dashboard extends React.Component {
     this.setState({ value: index });
   };
 
-  getPendapatanByPo = async () => {
-    axios
-      .get(`${process.env.REACT_APP_API}/manager/total-pendapatan-by-po`)
-      .then(res => {
-        res.data.map(data => {
-          this.state.tpbp_label.push(data.po_nama);
-          this.state.tpbp_value.push(data.total);
-        });
-      });
-  };
-
   getPendapatanByBulan = async () => {
     axios
-      .get(`${process.env.REACT_APP_API}/manager/total-pendapatan-by-bulan`)
+      .get(
+        `${process.env.REACT_APP_API}/manager-po/total-pendapatan-by-bulan/${
+          this.state.po_id
+        }`
+      )
       .then(res => {
         res.data.map(data => {
           this.state.tpbb.labels.push(data.bulan);
@@ -85,39 +89,50 @@ class Dashboard extends React.Component {
       });
   };
 
-  getPo = () => {
-    axios.get(`${process.env.REACT_APP_API}/manager/total-po`).then(res => {
-      this.setState({ po: res.data[0].total_po });
-    });
+  getAgen = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_API}/manager-po/total-agen/${this.state.po_id}`
+      )
+      .then(res => {
+        this.setState({ agen: res.data[0].total_agen });
+      });
   };
 
   getTiketTerjual = () => {
     axios
-      .get(`${process.env.REACT_APP_API}/manager/total-tiket-terjual`)
+      .get(
+        `${process.env.REACT_APP_API}/manager-po/total-tiket-terjual/${
+          this.state.po_id
+        }`
+      )
       .then(res => {
         this.setState({ total_tiket_terjual: res.data[0].total_tiket_terjual });
       });
   };
   getPendapatan = () => {
     axios
-      .get(`${process.env.REACT_APP_API}/manager/total-pendapatan`)
+      .get(
+        `${process.env.REACT_APP_API}/manager-po/total-pendapatan/${
+          this.state.po_id
+        }`
+      )
       .then(res => {
         this.setState({ total_pendapatan: res.data[0].total_pendapatan });
       });
   };
 
   componentDidMount() {
-    this.getPo();
+    this.getAgen();
     this.getPendapatan();
     this.getTiketTerjual();
-    this.getPendapatanByPo();
     this.getPendapatanByBulan();
   }
 
   render() {
-    console.log('stata', this.state.total_pendapatan);
+    console.log('poid', this.state.po_id);
     const { classes } = this.props;
-    const { po, total_pendapatan, total_tiket_terjual } = this.state;
+    const { agen, total_pendapatan, total_tiket_terjual } = this.state;
     return (
       <div>
         <GridContainer>
@@ -128,7 +143,7 @@ class Dashboard extends React.Component {
                   <Store />
                 </CardIcon>
                 <p className={classes.cardCategory}>Jumlah PO</p>
-                <h3 className={classes.cardTitle}>{po}</h3>
+                <h3 className={classes.cardTitle}>{agen}</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -176,37 +191,6 @@ class Dashboard extends React.Component {
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card chart>
-              <CardHeader color="success">
-                {console.log('asasa', this.state.tpbp_value)}
-                <ChartistGraph
-                  className="ct-chart"
-                  data={{
-                    labels: this.state.tpbp_label,
-                    series: [this.state.tpbp_value]
-                  }}
-                  type="Line"
-                  options={dailySalesChart.options}
-                  listener={dailySalesChart.animation}
-                />
-              </CardHeader>
-              <CardBody>
-                <h4 className={classes.cardTitle}>Daily Sales</h4>
-                <p className={classes.cardCategory}>
-                  <span className={classes.successText}>
-                    <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                  </span>{' '}
-                  increase in today sales.
-                </p>
-              </CardBody>
-              <CardFooter chart>
-                <div className={classes.stats}>
-                  <AccessTime /> updated 4 minutes ago
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={12}>
-            <Card chart>
               {console.log('sss', this.state.tpbb)}
               <CardHeader color="warning">
                 <ChartistGraph
@@ -220,30 +204,6 @@ class Dashboard extends React.Component {
               </CardHeader>
               <CardBody>
                 <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-                <p className={classes.cardCategory}>
-                  Last Campaign Performance
-                </p>
-              </CardBody>
-              <CardFooter chart>
-                <div className={classes.stats}>
-                  <AccessTime /> campaign sent 2 days ago
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <Card chart>
-              <CardHeader color="danger">
-                <ChartistGraph
-                  className="ct-chart"
-                  data={completedTasksChart.data}
-                  type="Line"
-                  options={completedTasksChart.options}
-                  listener={completedTasksChart.animation}
-                />
-              </CardHeader>
-              <CardBody>
-                <h4 className={classes.cardTitle}>Completed Tasks</h4>
                 <p className={classes.cardCategory}>
                   Last Campaign Performance
                 </p>

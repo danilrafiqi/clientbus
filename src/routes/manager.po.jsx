@@ -3,16 +3,12 @@ import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
 // import ContentPaste from "@material-ui/icons/ContentPaste";
 
-import Unarchive from '@material-ui/icons/Unarchive';
 // core components/views
-import DashboardPage from 'views/Manager/Dashboard.jsx';
-import UserProfile from 'views/UserProfile/UserProfile.jsx';
-import Bank from 'views/SuperAdmin/Bank/BankList';
-import Po from 'views/SuperAdmin/Po/PoList';
+import DashboardPage from 'views/ManagerPo/Dashboard.jsx';
 
 const dashboardRoutes = [
   {
-    path: '/managerpo/dashboard',
+    path: '/manager-po/dashboard',
     sidebarName: 'Dashboard',
     navbarName: 'Material Dashboard',
     icon: Dashboard,
@@ -20,8 +16,8 @@ const dashboardRoutes = [
   },
   {
     redirect: true,
-    path: '/managerpo',
-    to: '/managerpo/dashboard',
+    path: '/manager-po',
+    to: '/manager-po/dashboard',
     navbarName: 'Redirect'
   }
 ];

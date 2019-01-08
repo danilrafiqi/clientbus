@@ -50,7 +50,7 @@ class Kursi extends Component {
     const get_kursi_dipesan = () => {
       const temp = [];
       kursi.data.map(mykursi => {
-        temp.push(mykursi.no_kursi);
+        return temp.push(mykursi.no_kursi);
       });
       return temp;
     };
@@ -59,7 +59,7 @@ class Kursi extends Component {
     for (let i = 1; i <= jumlah_kursi.data[0].jumlah_kursi; i++) {
       cek = `enable ${i}`;
       for (let j = 0; j < data_kursi.length; j++) {
-        if (i == data_kursi[j]) {
+        if (i === parseInt(data_kursi[j])) {
           cek = `disable ${data_kursi[j]}`;
         }
       }
