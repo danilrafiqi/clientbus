@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { UpdateBtn } from 'components/Crud/Btn';
 import AddUpdate from 'components/Crud/AddUpdate';
+import tokenHelpers from 'helpers/tokenHelpers';
 
 const styles = theme => ({
   root: {
@@ -28,9 +29,15 @@ class AgenAdd extends Component {
     labelWidth: 0,
     open: false,
     id: '',
-    kode: '',
+    po_id: this.setPo(),
     deskripsi: ''
   };
+
+  setPo() {
+    const user = tokenHelpers.decodeToken();
+    return user.po;
+  }
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -43,7 +50,6 @@ class AgenAdd extends Component {
     axios.get(`${process.env.REACT_APP_API}/rute/${id}`).then(res => {
       this.setState({
         open: true,
-        kode: res.data[0].kode,
         deskripsi: res.data[0].deskripsi
       });
     });
@@ -51,14 +57,11 @@ class AgenAdd extends Component {
   update = id => {
     axios
       .put(`${process.env.REACT_APP_API}/rute/${id}`, {
-        kode: this.state.kode,
         deskripsi: this.state.deskripsi
       })
       .then(res => {
         this.setState({
           open: false,
-          id: '',
-          kode: '',
           deskripsi: ''
         });
         this.props.getData();
@@ -67,11 +70,6 @@ class AgenAdd extends Component {
   render() {
     const { classes } = this.props;
     const dataForm = [
-      {
-        title: 'Kode',
-        name: 'kode',
-        nilai: this.state.kode
-      },
       {
         title: 'Deskripsi',
         name: 'deskripsi',

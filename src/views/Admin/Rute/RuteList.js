@@ -16,6 +16,7 @@ import TableHeader from 'components/Crud/TableHeader';
 import RuteAdd from './RuteAdd';
 import RuteUpdate from './RuteUpdate';
 import RuteDelete from './RuteDelete';
+import tokenHelpers from 'helpers/tokenHelpers';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -120,7 +121,8 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   all = () => {
-    Axios.get(`${process.env.REACT_APP_API}/rute`).then(res => {
+    const user = tokenHelpers.decodeToken();
+    Axios.get(`${process.env.REACT_APP_API}/rute/${user.po}/bypo`).then(res => {
       this.setState({
         data: res.data,
         loading: true
@@ -138,12 +140,6 @@ class EnhancedTable extends React.Component {
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
     const rows = [
-      {
-        id: 'kode',
-        numeric: false,
-        disablePadding: false,
-        label: 'Kode'
-      },
       {
         id: 'deskripsi',
         numeric: false,
@@ -189,9 +185,6 @@ class EnhancedTable extends React.Component {
                       selected={isSelected}>
                       <TableCell padding="checkbox">
                         <Checkbox checked={isSelected} />
-                      </TableCell>
-                      <TableCell component="th" scope="row" padding="none">
-                        {n.kode}
                       </TableCell>
                       <TableCell>{n.deskripsi}</TableCell>
                     </TableRow>

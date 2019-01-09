@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { AddBtn } from 'components/Crud/Btn';
+import tokenHelpers from 'helpers/tokenHelpers';
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -26,10 +28,14 @@ class AgenAdd extends Component {
   state = {
     labelWidth: 0,
     open: false,
-    id: '',
-    kode: '',
+    po_id: this.setPo(),
     deskripsi: ''
   };
+
+  setPo() {
+    const user = tokenHelpers.decodeToken();
+    return user.po;
+  }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -40,14 +46,12 @@ class AgenAdd extends Component {
   create = () => {
     axios
       .post(`${process.env.REACT_APP_API}/rute`, {
-        kode: this.state.kode,
+        po_id: this.state.po_id,
         deskripsi: this.state.deskripsi
       })
       .then(res => {
         this.setState({
           open: false,
-          id: '',
-          kode: '',
           deskripsi: ''
         });
         this.props.getData();
@@ -56,11 +60,6 @@ class AgenAdd extends Component {
   render() {
     const { classes } = this.props;
     const dataForm = [
-      {
-        title: 'Kode',
-        name: 'kode',
-        nilai: this.state.kode
-      },
       {
         title: 'Deskripsi',
         name: 'deskripsi',
