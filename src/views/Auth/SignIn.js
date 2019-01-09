@@ -13,7 +13,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
 import swal from '@sweetalert/with-react';
 // import { createBrowserHistory } from 'history';
-import jwtDecode from 'jwt-decode';
+import tokenHelpers from 'helpers/tokenHelpers';
 
 const styles = theme => ({
   main: {
@@ -71,10 +71,9 @@ class SignIn extends Component {
           </div>
         );
       } else {
-        localStorage.setItem('drcreative', res.data);
-        const token = res.data;
-        const user = jwtDecode(token);
-        // console.log('aaa', res.data.hak_akses);
+        tokenHelpers.setToken(res.data);
+        const user = tokenHelpers.decodeToken(res.data);
+
         switch (user.hak_akses) {
           case 'superadmin':
             this.props.history.push('/superadmin');

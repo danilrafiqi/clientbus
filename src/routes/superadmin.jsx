@@ -17,13 +17,13 @@ const dashboardRoutes = [
   {
     path: '/superadmin/dashboard',
     sidebarName: 'Dashboard',
-    navbarName: 'Material Dashboard',
+    navbarName: 'Dashboard',
     icon: Dashboard,
     component: DashboardPage
   },
   {
     path: '/superadmin/profile',
-    sidebarName: 'User Profile',
+    sidebarName: 'Profile',
     navbarName: 'Profile',
     icon: Person,
     component: UserProfile
@@ -51,8 +51,8 @@ const dashboardRoutes = [
   },
   {
     path: '/superadmin/user',
-    sidebarName: 'Login User',
-    navbarName: 'Login User',
+    sidebarName: 'User',
+    navbarName: 'User',
     icon: Unarchive,
     component: Login
   },
