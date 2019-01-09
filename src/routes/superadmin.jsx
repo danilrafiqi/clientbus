@@ -10,6 +10,8 @@ import UserProfile from 'views/Dashboard/UserProfile.jsx';
 import Bank from 'views/SuperAdmin/Bank/BankList';
 import Po from 'views/SuperAdmin/Po/PoList';
 import Login from 'views/SuperAdmin/User/LoginList';
+import Karyawan from 'views/SuperAdmin/Karyawan/KaryawanList';
+import ChangePassword from 'views/SuperAdmin/ChangePassword/ChangePassword';
 
 const dashboardRoutes = [
   {
@@ -42,10 +44,10 @@ const dashboardRoutes = [
   },
   {
     path: '/superadmin/changepassword',
-    sidebarName: 'Po',
-    navbarName: 'Po',
+    sidebarName: 'Change Password',
+    navbarName: 'Change Password',
     icon: Unarchive,
-    component: Po
+    component: ChangePassword
   },
   {
     path: '/superadmin/user',
@@ -53,6 +55,13 @@ const dashboardRoutes = [
     navbarName: 'Login User',
     icon: Unarchive,
     component: Login
+  },
+  {
+    path: '/superadmin/karyawan',
+    sidebarName: 'Karyawan',
+    navbarName: 'Karyawan',
+    icon: Unarchive,
+    component: Karyawan
   },
   {
     redirect: true,

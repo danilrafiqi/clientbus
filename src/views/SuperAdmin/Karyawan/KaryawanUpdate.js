@@ -7,6 +7,12 @@ import axios from 'axios';
 // import API from '../../components/Api';
 import { UpdateBtn } from '../../../components/Crud/Btn';
 
+import FilledInput from '@material-ui/core/FilledInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -30,8 +36,7 @@ class AgenAdd extends Component {
     open: false,
     id: '',
     nama: '',
-    no_rek: '',
-    atas_nama: ''
+    jenis_kelamin: ''
   };
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -42,29 +47,25 @@ class AgenAdd extends Component {
   };
 
   detail = id => {
-    axios.get(`${process.env.REACT_APP_API}/bank/${id}`).then(res => {
+    axios.get(`${process.env.REACT_APP_API}/user/${id}`).then(res => {
       this.setState({
         open: true,
         nama: res.data[0].nama,
-        no_rek: res.data[0].no_rek,
-        atas_nama: res.data[0].atas_nama
+        jenis_kelamin: res.data[0].jenis_kelamin
       });
     });
   };
   update = id => {
     axios
-      .put(`${process.env.REACT_APP_API}/bank/${id}`, {
+      .put(`${process.env.REACT_APP_API}/user/${id}`, {
         nama: this.state.nama,
-        no_rek: this.state.no_rek,
-        atas_nama: this.state.atas_nama
+        jenis_kelamin: this.state.jenis_kelamin
       })
       .then(res => {
         this.setState({
           open: false,
-          id: '',
           nama: '',
-          no_rek: '',
-          atas_nama: ''
+          jenis_kelamin: ''
         });
         this.props.getData();
       });
@@ -73,25 +74,15 @@ class AgenAdd extends Component {
     const { classes } = this.props;
     const dataForm = [
       {
-        title: 'Nama Bank',
+        title: 'Nama',
         name: 'nama',
         nilai: this.state.nama
-      },
-      {
-        title: 'No Rekening',
-        name: 'no_rek',
-        nilai: this.state.no_rek
-      },
-      {
-        title: 'Nama Pemilik',
-        name: 'atas_nama',
-        nilai: this.state.atas_nama
       }
     ];
 
     return (
       <AddUpdate
-        title="Update Bank"
+        title="Update Karyawan"
         open={this.state.open}
         btnPopUp={
           <UpdateBtn handleClickOpen={() => this.detail(this.props.idNya)} />
@@ -121,6 +112,20 @@ class AgenAdd extends Component {
               />
             );
           })}
+
+          <FormControl
+            variant="filled"
+            className={classes.formControl}
+            fullWidth>
+            <InputLabel htmlFor="jenis_kelamin">Jenis Kelamin</InputLabel>
+            <Select
+              value={this.state.jenis_kelamin}
+              onChange={this.handleChange}
+              input={<FilledInput name="jenis_kelamin" id="jenis_kelamin" />}>
+              <MenuItem value="l">Laki Laki</MenuItem>
+              <MenuItem value="p">Perempuan</MenuItem>
+            </Select>
+          </FormControl>
         </form>
       </AddUpdate>
     );

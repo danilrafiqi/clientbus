@@ -14,8 +14,8 @@ import Axios from 'axios';
 import ToolBarTable from 'components/Crud/ToolBarTable';
 import TableHeader from 'components/Crud/TableHeader';
 import Add from './Add';
-import Update from './LoginUpdate';
-import Delete from './LoginDelete';
+import Update from './KaryawanUpdate';
+import Delete from './KaryawanDelete';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -82,7 +82,7 @@ class EnhancedTable extends React.Component {
 
   handleSelectAllClick = event => {
     if (event.target.checked) {
-      this.setState(state => ({ selected: state.data.map(n => n.email) }));
+      this.setState(state => ({ selected: state.data.map(n => n.id) }));
       return;
     }
     this.setState({ selected: [] });
@@ -120,7 +120,7 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   all = () => {
-    Axios.get(`${process.env.REACT_APP_API}/login/all`).then(res => {
+    Axios.get(`${process.env.REACT_APP_API}/operator`).then(res => {
       this.setState({
         data: res.data,
         loading: true
@@ -139,23 +139,23 @@ class EnhancedTable extends React.Component {
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
     const rows = [
       {
-        id: 'email',
+        id: 'nama',
         numeric: false,
         disablePadding: false,
-        label: 'Email'
+        label: 'Nama Karyawan'
       },
       {
-        id: 'hak_akses',
+        id: 'jenis_kelamin',
         numeric: false,
         disablePadding: false,
-        label: 'Hak Akses'
+        label: 'Jenis Kelamin'
       }
     ];
 
     return (
       <Paper className={classes.root}>
         <ToolBarTable
-          title="User"
+          title="Karyawan"
           numSelected={selected.length}
           vSelected={selected[0]}
           tombolDelete={<Delete idNya={selected[0]} getData={this.all} />}
@@ -177,21 +177,21 @@ class EnhancedTable extends React.Component {
               {stableSort(data, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
-                  const isSelected = this.isSelected(n.email);
+                  const isSelected = this.isSelected(n.id);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n.email)}
+                      onClick={event => this.handleClick(event, n.id)}
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
-                      key={n.email}
+                      key={n.id}
                       selected={isSelected}>
                       <TableCell padding="checkbox">
                         <Checkbox checked={isSelected} />
                       </TableCell>
-                      <TableCell>{n.email}</TableCell>
-                      <TableCell>{n.hak_akses}</TableCell>
+                      <TableCell>{n.nama}</TableCell>
+                      <TableCell>{n.jenis_kelamin}</TableCell>
                     </TableRow>
                   );
                 })}
