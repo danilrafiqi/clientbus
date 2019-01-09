@@ -12,6 +12,7 @@ import Booking from 'views/Web/Booking';
 import Konfirmasi from 'views/Web/Konfirmasi';
 import CekTiket from 'views/Web/CekTiket';
 import SignIn from 'views/Auth/SignIn';
+import MetodePembayaran from 'views/Web/MetodePembayaran';
 import NotFound from 'components/Web/NotFound/NotFound.js';
 
 const hist = createBrowserHistory();
@@ -27,6 +28,7 @@ ReactDOM.render(
       <Route path="/konfirmasi" component={Konfirmasi} />
       <Route path="/cektiket" component={CekTiket} />
       <Route path="/auth/signin" component={SignIn} />
+      <Route path="/metodepembayaran" component={MetodePembayaran} />
       <Route path="/" component={Home} exact />
       <Route component={NotFound} />
     </Switch>

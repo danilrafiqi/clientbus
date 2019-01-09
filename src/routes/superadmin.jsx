@@ -9,6 +9,7 @@ import DashboardPage from 'views/Dashboard/Dashboard.jsx';
 import UserProfile from 'views/Dashboard/UserProfile.jsx';
 import Bank from 'views/SuperAdmin/Bank/BankList';
 import Po from 'views/SuperAdmin/Po/PoList';
+import Login from 'views/SuperAdmin/User/LoginList';
 
 const dashboardRoutes = [
   {
@@ -46,7 +47,13 @@ const dashboardRoutes = [
     icon: Unarchive,
     component: Po
   },
-
+  {
+    path: '/superadmin/user',
+    sidebarName: 'Login User',
+    navbarName: 'Login User',
+    icon: Unarchive,
+    component: Login
+  },
   {
     redirect: true,
     path: '/superadmin',
