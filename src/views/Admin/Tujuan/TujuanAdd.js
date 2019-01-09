@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { AddBtn } from 'components/Crud/Btn';
 import AddUpdate from 'components/Crud/AddUpdate';
+import tokenHelpers from 'helpers/tokenHelpers';
 
 const styles = theme => ({
   root: {
@@ -65,7 +66,8 @@ class AgenAdd extends Component {
   };
 
   getRute = () => {
-    axios.get(`${process.env.REACT_APP_API}/rute/`).then(res => {
+    const user = tokenHelpers.decodeToken();
+    axios.get(`${process.env.REACT_APP_API}/rute/${user.po}/bypo`).then(res => {
       this.setState({
         data_rute: res.data
       });

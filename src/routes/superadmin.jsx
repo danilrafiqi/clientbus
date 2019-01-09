@@ -11,7 +11,8 @@ import Bank from 'views/SuperAdmin/Bank/BankList';
 import Po from 'views/SuperAdmin/Po/PoList';
 import Login from 'views/SuperAdmin/User/LoginList';
 import Karyawan from 'views/SuperAdmin/Karyawan/KaryawanList';
-import ChangePassword from 'views/SuperAdmin/ChangePassword/ChangePassword';
+import KaryawanPo from 'views/SuperAdmin/KaryawanPo/KaryawanPoList';
+import ChangePassword from 'views/Dashboard/ChangePassword';
 
 const dashboardRoutes = [
   {
@@ -62,6 +63,13 @@ const dashboardRoutes = [
     navbarName: 'Karyawan',
     icon: Unarchive,
     component: Karyawan
+  },
+  {
+    path: '/superadmin/kkaryawan-po',
+    sidebarName: 'Karyawan Po',
+    navbarName: 'Karyawan Po',
+    icon: Unarchive,
+    component: KaryawanPo
   },
   {
     redirect: true,

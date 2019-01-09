@@ -35,8 +35,9 @@ class AgenAdd extends Component {
     labelWidth: 0,
     open: false,
     id: '',
-    nama: '',
-    jenis_kelamin: ''
+    email: '',
+    hak_akses: '',
+    data_hak_akses: ['manager_po', 'petugas']
   };
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -47,25 +48,24 @@ class AgenAdd extends Component {
   };
 
   detail = id => {
-    axios.get(`${process.env.REACT_APP_API}/karyawan-po/${id}`).then(res => {
+    axios.get(`${process.env.REACT_APP_API}/login/${id}`).then(res => {
       this.setState({
         open: true,
-        nama: res.data[0].nama,
-        jenis_kelamin: res.data[0].jenis_kelamin
+        email: res.data[0].email,
+        hak_akses: res.data[0].hak_akses
       });
     });
   };
   update = id => {
     axios
-      .put(`${process.env.REACT_APP_API}/karyawan-po/${id}`, {
-        nama: this.state.nama,
-        jenis_kelamin: this.state.jenis_kelamin
+      .put(`${process.env.REACT_APP_API}/login/${id}`, {
+        hak_akses: this.state.hak_akses
       })
       .then(res => {
         this.setState({
           open: false,
-          nama: '',
-          jenis_kelamin: ''
+          email: '',
+          hak_akses: ''
         });
         this.props.getData();
       });
@@ -74,15 +74,15 @@ class AgenAdd extends Component {
     const { classes } = this.props;
     const dataForm = [
       {
-        title: 'Nama',
-        name: 'nama',
-        nilai: this.state.nama
+        title: 'Email',
+        name: 'email',
+        nilai: this.state.email
       }
     ];
 
     return (
       <AddUpdate
-        title="Update Karyawan"
+        title="Update User"
         open={this.state.open}
         btnPopUp={
           <UpdateBtn handleClickOpen={() => this.detail(this.props.idNya)} />
@@ -109,6 +109,7 @@ class AgenAdd extends Component {
                 onChange={this.handleChange}
                 margin="normal"
                 variant="filled"
+                disabled={true}
               />
             );
           })}
@@ -117,13 +118,18 @@ class AgenAdd extends Component {
             variant="filled"
             className={classes.formControl}
             fullWidth>
-            <InputLabel htmlFor="jenis_kelamin">Jenis Kelamin</InputLabel>
+            <InputLabel htmlFor="hak_akses">Hak Akses</InputLabel>
             <Select
-              value={this.state.jenis_kelamin}
+              value={this.state.hak_akses}
               onChange={this.handleChange}
-              input={<FilledInput name="jenis_kelamin" id="jenis_kelamin" />}>
-              <MenuItem value="l">Laki Laki</MenuItem>
-              <MenuItem value="p">Perempuan</MenuItem>
+              input={<FilledInput name="hak_akses" id="hak_akses" />}>
+              {this.state.data_hak_akses.map(datas => {
+                return (
+                  <MenuItem key={datas} value={datas}>
+                    {datas}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
         </form>

@@ -16,6 +16,7 @@ import TableHeader from 'components/Crud/TableHeader';
 import Add from './TujuanAdd';
 import Update from './TujuanUpdate';
 import Delete from './TujuanDelete';
+import tokenHelpers from 'helpers/tokenHelpers';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -120,12 +121,15 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   all = () => {
-    Axios.get(`${process.env.REACT_APP_API}/tujuan`).then(res => {
-      this.setState({
-        data: res.data,
-        loading: true
-      });
-    });
+    const user = tokenHelpers.decodeToken();
+    Axios.get(`${process.env.REACT_APP_API}/tujuan/${user.po}/bypo`).then(
+      res => {
+        this.setState({
+          data: res.data,
+          loading: true
+        });
+      }
+    );
   };
 
   componentWillMount() {
@@ -196,9 +200,7 @@ class EnhancedTable extends React.Component {
                       <TableCell padding="checkbox">
                         <Checkbox checked={isSelected} />
                       </TableCell>
-                      <TableCell component="th" scope="row" padding="none">
-                        {n.pemberangkatan}
-                      </TableCell>
+                      <TableCell>{n.pemberangkatan}</TableCell>
                       <TableCell>{n.pemberhentian}</TableCell>
                       <TableCell>{n.rute}</TableCell>
                     </TableRow>

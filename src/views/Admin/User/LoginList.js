@@ -14,8 +14,9 @@ import Axios from 'axios';
 import ToolBarTable from 'components/Crud/ToolBarTable';
 import TableHeader from 'components/Crud/TableHeader';
 import Add from './Add';
-import Update from './KaryawanUpdate';
-import Delete from './KaryawanDelete';
+import Update from './LoginUpdate';
+import Delete from './LoginDelete';
+import tokenHelpers from 'helpers/tokenHelpers';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -82,7 +83,7 @@ class EnhancedTable extends React.Component {
 
   handleSelectAllClick = event => {
     if (event.target.checked) {
-      this.setState(state => ({ selected: state.data.map(n => n.id) }));
+      this.setState(state => ({ selected: state.data.map(n => n.email) }));
       return;
     }
     this.setState({ selected: [] });
@@ -120,12 +121,15 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   all = () => {
-    Axios.get(`${process.env.REACT_APP_API}/karyawan-po`).then(res => {
-      this.setState({
-        data: res.data,
-        loading: true
-      });
-    });
+    const user = tokenHelpers.decodeToken();
+    Axios.get(`${process.env.REACT_APP_API}/login/${user.po}/bypo`).then(
+      res => {
+        this.setState({
+          data: res.data,
+          loading: true
+        });
+      }
+    );
   };
 
   componentWillMount() {
@@ -139,23 +143,23 @@ class EnhancedTable extends React.Component {
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
     const rows = [
       {
-        id: 'nama',
+        id: 'email',
         numeric: false,
         disablePadding: false,
-        label: 'Nama Karyawan'
+        label: 'Email'
       },
       {
-        id: 'jenis_kelamin',
+        id: 'hak_akses',
         numeric: false,
         disablePadding: false,
-        label: 'Jenis Kelamin'
+        label: 'Hak Akses'
       }
     ];
 
     return (
       <Paper className={classes.root}>
         <ToolBarTable
-          title="Karyawan"
+          title="User"
           numSelected={selected.length}
           vSelected={selected[0]}
           tombolDelete={<Delete idNya={selected[0]} getData={this.all} />}
@@ -177,21 +181,21 @@ class EnhancedTable extends React.Component {
               {stableSort(data, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
-                  const isSelected = this.isSelected(n.id);
+                  const isSelected = this.isSelected(n.email);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n.id)}
+                      onClick={event => this.handleClick(event, n.email)}
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
-                      key={n.id}
+                      key={n.email}
                       selected={isSelected}>
                       <TableCell padding="checkbox">
                         <Checkbox checked={isSelected} />
                       </TableCell>
-                      <TableCell>{n.nama}</TableCell>
-                      <TableCell>{n.jenis_kelamin}</TableCell>
+                      <TableCell>{n.email}</TableCell>
+                      <TableCell>{n.hak_akses}</TableCell>
                     </TableRow>
                   );
                 })}

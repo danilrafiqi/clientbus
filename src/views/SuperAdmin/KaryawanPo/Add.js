@@ -107,7 +107,7 @@ class Add extends Component {
     if (po_id_for_cek == 'null') {
       userUrl = `${process.env.REACT_APP_API}/user`;
     } else {
-      userUrl = `${process.env.REACT_APP_API}/operator`;
+      userUrl = `${process.env.REACT_APP_API}/karyawan-po`;
     }
     const dataLogin = {
       email: this.state.email,

@@ -5,7 +5,7 @@ class AgenDelete extends Component {
   render() {
     return (
       <Delete
-        api={`${process.env.REACT_APP_API}/karyawan-po`}
+        api={`${process.env.REACT_APP_API}/login`}
         getData={this.props.getData}
         idNya={this.props.idNya}
       />

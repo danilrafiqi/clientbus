@@ -56,12 +56,7 @@ class Add extends Component {
   };
 
   getHakAkses = () => {
-    const hak = this.getUserFromToken();
-    if (hak.hak_akses === 'superadmin') {
-      return ['superadmin', 'admin', 'manager', 'manager_po', 'petugas'];
-    } else {
-      return ['manager_po', 'petugas'];
-    }
+    return ['manager_po', 'petugas'];
   };
 
   getToken = () => {

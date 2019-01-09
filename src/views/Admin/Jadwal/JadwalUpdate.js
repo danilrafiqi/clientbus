@@ -10,6 +10,11 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { UpdateBtn } from 'components/Crud/Btn';
 import AddUpdate from 'components/Crud/AddUpdate';
+import tokenHelpers from 'helpers/tokenHelpers';
+import moment from 'moment';
+import DateFnsUtils from '@date-io/moment';
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import { DateTimePicker } from 'material-ui-pickers';
 
 const styles = theme => ({
   root: {
@@ -38,7 +43,18 @@ class AgenAdd extends Component {
     bus_id: '',
     data_bus: [],
     tujuan_id: '',
-    data_tujuan: []
+    data_tujuan: [],
+    po_id: this.setPo(),
+    tanggal_keberangkatan: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+  };
+  setPo() {
+    const user = tokenHelpers.decodeToken();
+    return user.po;
+  }
+  handleDateChange = date => {
+    this.setState({
+      tanggal_keberangkatan: moment(date).format('YYYY-MM-DD HH:mm:ss')
+    });
   };
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -55,7 +71,8 @@ class AgenAdd extends Component {
         harga: res.data[0].harga,
         kursi_tersedia: res.data[0].kursi_tersedia,
         bus_id: res.data[0].bus_id,
-        tujuan_id: res.data[0].tujuan_id
+        tujuan_id: res.data[0].tujuan_id,
+        tanggal_keberangkatan: res.data[0].tanggal_keberangkatan
       });
     });
   };
@@ -65,7 +82,8 @@ class AgenAdd extends Component {
         harga: this.state.harga,
         kursi_tersedia: this.state.kursi_tersedia,
         bus_id: this.state.bus_id,
-        tujuan_id: this.state.tujuan_id
+        tujuan_id: this.state.tujuan_id,
+        tanggal_keberangkatan: this.state.tanggal_keberangkatan
       })
       .then(res => {
         this.setState({
@@ -74,25 +92,32 @@ class AgenAdd extends Component {
           harga: '',
           kursi_tersedia: '',
           bus_id: '',
-          tujuan_id: ''
+          tujuan_id: '',
+          tanggal_keberangkatan: moment(new Date()).format(
+            'YYYY-MM-DD HH:mm:ss'
+          )
         });
         this.props.getData();
       });
   };
 
   getBus = () => {
-    axios.get(`${process.env.REACT_APP_API}/bus/`).then(res => {
-      this.setState({
-        data_bus: res.data
+    axios
+      .get(`${process.env.REACT_APP_API}/bus/${this.state.po_id}/bypo`)
+      .then(res => {
+        this.setState({
+          data_bus: res.data
+        });
       });
-    });
   };
   getTujuan = () => {
-    axios.get(`${process.env.REACT_APP_API}/tujuan/`).then(res => {
-      this.setState({
-        data_tujuan: res.data
+    axios
+      .get(`${process.env.REACT_APP_API}/tujuan/${this.state.po_id}/bypo`)
+      .then(res => {
+        this.setState({
+          data_tujuan: res.data
+        });
       });
-    });
   };
 
   componentWillMount() {
@@ -100,6 +125,7 @@ class AgenAdd extends Component {
     this.getTujuan();
   }
   render() {
+    const { tanggal_keberangkatan } = this.state;
     const { classes } = this.props;
     const dataForm = [
       {
@@ -111,11 +137,6 @@ class AgenAdd extends Component {
         title: 'Kursi Tersedia',
         name: 'kursi_tersedia',
         nilai: this.state.kursi_tersedia
-      },
-      {
-        title: 'Tanggal Keberangkatan',
-        name: 'tanggal_keberangkatan',
-        nilai: this.state.tanggal_keberangkatan
       }
     ];
 
@@ -186,6 +207,22 @@ class AgenAdd extends Component {
                 );
               })}
             </Select>
+          </FormControl>
+
+          <FormControl
+            variant="filled"
+            className={classes.formControl}
+            fullWidth>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DateTimePicker
+                fullWidth
+                id="date"
+                value={tanggal_keberangkatan}
+                minDate={new Date()}
+                maxDate={new Date().setMonth(new Date().getMonth() + 2)}
+                onChange={this.handleDateChange}
+              />
+            </MuiPickersUtilsProvider>
           </FormControl>
         </form>
       </AddUpdate>

@@ -18,6 +18,7 @@ import ButtonOri from '@material-ui/core/Button';
 
 import axios from 'axios';
 import swal from '@sweetalert/with-react';
+import tokenHelpers from 'helpers/tokenHelpers';
 
 const styles = {
   cardCategoryWhite: {
@@ -53,7 +54,14 @@ class ChangePassword extends React.Component {
 
   searchUser = () => {
     const { email } = this.state;
-    axios.get(`${process.env.REACT_APP_API}/login/${email}`).then(res => {
+    const user = tokenHelpers.decodeToken();
+    let loginUrl;
+    if (user.po === 'null') {
+      loginUrl = `${process.env.REACT_APP_API}/login/${email}`;
+    } else {
+      loginUrl = `${process.env.REACT_APP_API}/login/${email}/bypo/${user.po}`;
+    }
+    axios.get(`${loginUrl}`).then(res => {
       if (res.data.length !== 0) {
         this.setState({
           email_found: res.data[0].email,
@@ -66,6 +74,7 @@ class ChangePassword extends React.Component {
           password_baru: '',
           disable: true
         });
+        swal(<h1>Email Tidak ditemukan</h1>);
       }
     });
   };

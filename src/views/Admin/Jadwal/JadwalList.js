@@ -16,6 +16,8 @@ import TableHeader from 'components/Crud/TableHeader';
 import Add from './JadwalAdd';
 import Update from './JadwalUpdate';
 import Delete from './JadwalDelete';
+import moment from 'moment';
+import tokenHelpers from 'helpers/tokenHelpers';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -120,12 +122,15 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   all = () => {
-    Axios.get(`${process.env.REACT_APP_API}/jadwal`).then(res => {
-      this.setState({
-        data: res.data,
-        loading: true
-      });
-    });
+    const user = tokenHelpers.decodeToken();
+    Axios.get(`${process.env.REACT_APP_API}/jadwal/${user.po}/bypo`).then(
+      res => {
+        this.setState({
+          data: res.data,
+          loading: true
+        });
+      }
+    );
   };
 
   componentWillMount() {
@@ -212,7 +217,11 @@ class EnhancedTable extends React.Component {
                         {n.harga}
                       </TableCell>
                       <TableCell>{n.kursi_tersedia}</TableCell>
-                      <TableCell>{n.tanggal_keberangkatan}</TableCell>
+                      <TableCell>
+                        {moment(n.tanggal_keberangkatan).format(
+                          'YYYY-MM-DD HH:mm:ss'
+                        )}
+                      </TableCell>
                       <TableCell>{n.bus}</TableCell>
                       <TableCell>
                         {n.tujuan_pemberangkatan}-{n.tujuan_pemberhentian}

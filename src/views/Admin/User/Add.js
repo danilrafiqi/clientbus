@@ -43,7 +43,7 @@ class Add extends Component {
       email: '',
       password: '',
       po_id_for_cek: this.setPoId(),
-      po_id: '',
+      po_id: this.setPoId(),
       data_po: [],
       data_hak_akses: this.getHakAkses()
     };
@@ -56,12 +56,7 @@ class Add extends Component {
   };
 
   getHakAkses = () => {
-    const hak = this.getUserFromToken();
-    if (hak.hak_akses === 'superadmin') {
-      return ['superadmin', 'admin', 'manager', 'manager_po', 'petugas'];
-    } else {
-      return ['manager_po', 'petugas'];
-    }
+    return ['manager_po', 'petugas'];
   };
 
   getToken = () => {
@@ -216,6 +211,7 @@ class Add extends Component {
             fullWidth>
             <InputLabel htmlFor="po_id">PO</InputLabel>
             <Select
+              disabled
               value={this.state.po_id}
               onChange={this.handleChange}
               input={<FilledInput name="po_id" id="po_id" />}>
@@ -243,7 +239,6 @@ class Add extends Component {
             </Select>
           </FormControl>
         </form>
-        {console.log('dpop', this.state.data_po)}
       </AddUpdate>
     );
   }

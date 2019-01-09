@@ -37,7 +37,7 @@ class App extends React.Component {
     pemberangkatan: '',
     pemberhentian: '',
     options: [],
-    tanggal_keberangkatan: new Date(),
+    tanggal_keberangkatan: moment(new Date()).format('YYYY-MM-DD'),
     data: []
   };
 
@@ -55,16 +55,13 @@ class App extends React.Component {
   }
   handleDateChange = date => {
     this.setState({ tanggal_keberangkatan: moment(date).format('YYYY-MM-DD') });
-    console.log('tanggal date', this.state.tanggal_keberangkatan);
   };
 
   handlePemberangkatan = pemberangkatan => {
     this.setState({ pemberangkatan });
-    console.log(`Option selected:`, pemberangkatan);
   };
   handlepemBerhentian = pemberhentian => {
     this.setState({ pemberhentian });
-    console.log(`Option selected:`, pemberhentian);
   };
   // http://localhost:2018/cari/jadwal?pemberhentian=Kota%20Jakarta%20Selatan&pemberangkatan=Kota%20Bandar%20Lampung&tanggal_keberangkatan=2018-12-29
 
@@ -77,7 +74,7 @@ class App extends React.Component {
         pemberangkatan={
           <React.Fragment>
             <label className={classes.label} htmlFor="pemberangkatan">
-              From
+              Pemberangkatan
             </label>
             <Select
               id="pemberangkatan"
@@ -91,7 +88,7 @@ class App extends React.Component {
         pemberhentian={
           <React.Fragment>
             <label className={classes.label} htmlFor="pemberhentian">
-              From
+              Pemberhentian
             </label>
             <Select
               id="pemberhentian"
@@ -121,6 +118,7 @@ class App extends React.Component {
         }
         tombol={
           <Link
+            style={{ alignItems: 'center', display: 'flex' }}
             to={`/cari/jadwal?pemberhentian=${
               pemberhentian.value
             }&pemberangkatan=${

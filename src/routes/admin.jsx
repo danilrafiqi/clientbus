@@ -8,6 +8,9 @@ import Tujuan from 'views/Admin/Tujuan/TujuanList';
 import Jadwal from 'views/Admin/Jadwal/JadwalList';
 import UserProfile from 'views/Dashboard/UserProfile.jsx';
 import Person from '@material-ui/icons/Person';
+import ChangePassword from 'views/Dashboard/ChangePassword';
+import User from 'views/Admin/User/LoginList';
+import Karyawan from 'views/Admin/Karyawan/KaryawanList';
 
 const dashboardRoutes = [
   {
@@ -66,6 +69,27 @@ const dashboardRoutes = [
     navbarName: 'Jadwal',
     icon: Dashboard,
     component: Jadwal
+  },
+  {
+    path: '/admin/changepassword',
+    sidebarName: 'Change Password',
+    navbarName: 'Change Password',
+    icon: Dashboard,
+    component: ChangePassword
+  },
+  {
+    path: '/admin/user',
+    sidebarName: 'User',
+    navbarName: 'User',
+    icon: Dashboard,
+    component: User
+  },
+  {
+    path: '/admin/karyawan',
+    sidebarName: 'Karyawan',
+    navbarName: 'Karyawan',
+    icon: Dashboard,
+    component: Karyawan
   },
   {
     redirect: true,

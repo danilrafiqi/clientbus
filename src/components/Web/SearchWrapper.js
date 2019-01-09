@@ -37,7 +37,8 @@ class Search extends Component {
                   <div
                     className="col-lg-2 form-cols"
                     style={{
-                      textAlign: 'left'
+                      textAlign: 'left',
+                      display: 'flex'
                     }}>
                     {this.props.tombol}
                   </div>
