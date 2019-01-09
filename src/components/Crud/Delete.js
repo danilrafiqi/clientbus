@@ -7,6 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 import { DeleteBtn } from './Btn';
+import swal from '@sweetalert/with-react';
 
 class AlertDialog extends React.Component {
   state = {
@@ -22,10 +23,18 @@ class AlertDialog extends React.Component {
   };
   delete = id => {
     axios.delete(`${this.props.api}/${id}`).then(res => {
-      this.setState({
-        open: false
-      });
-      this.props.getData();
+      if (res.data.message === 'success') {
+        this.setState({
+          open: false
+        });
+        swal(<h1>Berhasil Menghapus Data</h1>);
+        this.props.getData();
+      } else {
+        this.setState({
+          open: false
+        });
+        swal(<h1>Gagal Menghapus</h1>);
+      }
     });
   };
   render() {

@@ -1,6 +1,5 @@
 // @material-ui/icons
 import Dashboard from '@material-ui/icons/Dashboard';
-import UpgradeToPro from 'views/UpgradeToPro/UpgradeToPro.jsx';
 import Bus from 'views/Admin/Bus/BusList';
 import Kelas from 'views/Admin/Kelas/KelasList';
 import Rute from 'views/Admin/Rute/RuteList';
@@ -16,7 +15,7 @@ const dashboardRoutes = [
     sidebarName: 'Dashboard',
     navbarName: 'Material Dashboard',
     icon: Dashboard,
-    component: UpgradeToPro
+    component: UserProfile
   },
 
   {

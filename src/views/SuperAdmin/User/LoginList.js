@@ -15,7 +15,7 @@ import ToolBarTable from 'components/Crud/ToolBarTable';
 import TableHeader from 'components/Crud/TableHeader';
 import Add from './Add';
 import Update from './BankUpdate';
-import Delete from './BankDelete';
+import Delete from './LoginDelete';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
