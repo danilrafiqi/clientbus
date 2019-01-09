@@ -69,7 +69,6 @@ class AgenAdd extends Component {
           id: '',
           nama: '',
           deskripsi: '',
-          po_id: '',
           data_po: []
         });
         this.props.getData();

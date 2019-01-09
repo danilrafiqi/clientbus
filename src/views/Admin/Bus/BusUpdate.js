@@ -81,13 +81,14 @@ class AgenAdd extends Component {
   getKelas = () => {
     const user = tokenHelpers.decodeToken();
 
-    axios.get(`${process.env.REACT_APP_API}/kelas/${user.po}`).then(res => {
-      this.setState({
-        data_kelas: res.data
+    axios
+      .get(`${process.env.REACT_APP_API}/kelas/${user.po}/bypo`)
+      .then(res => {
+        this.setState({
+          data_kelas: res.data
+        });
       });
-    });
   };
-
   componentWillMount() {
     this.getKelas();
   }

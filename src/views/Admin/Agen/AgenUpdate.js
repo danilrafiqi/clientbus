@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { UpdateBtn } from 'components/Crud/Btn';
 import AddUpdate from 'components/Crud/AddUpdate';
+import tokenHelpers from 'helpers/tokenHelpers';
 
 const styles = theme => ({
   root: {
@@ -34,14 +35,18 @@ class AgenUpdate extends Component {
     labelWidth: 0,
     open: false,
     id: '',
-    kode: '',
     nama: '',
     alamat: '',
     no_hp: '',
     email: '',
-    po_id: '',
+    po_id: this.setPo(),
     data_po: []
   };
+
+  setPo() {
+    const user = tokenHelpers.decodeToken();
+    return user.po;
+  }
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -54,7 +59,6 @@ class AgenUpdate extends Component {
     axios.get(`${process.env.REACT_APP_API}/agen/${id}`).then(res => {
       this.setState({
         open: true,
-        kode: res.data[0].kode,
         nama: res.data[0].nama,
         alamat: res.data[0].alamat,
         no_hp: res.data[0].no_hp,
@@ -66,7 +70,6 @@ class AgenUpdate extends Component {
   update = id => {
     axios
       .put(`${process.env.REACT_APP_API}/agen/${id}`, {
-        kode: this.state.kode,
         nama: this.state.nama,
         alamat: this.state.alamat,
         no_hp: this.state.no_hp,
@@ -77,12 +80,10 @@ class AgenUpdate extends Component {
         this.setState({
           open: false,
           id: '',
-          kode: '',
           nama: '',
           alamat: '',
           no_hp: '',
-          email: '',
-          po_id: ''
+          email: ''
         });
         this.props.getData();
       });
@@ -101,11 +102,6 @@ class AgenUpdate extends Component {
   render() {
     const { classes } = this.props;
     const dataForm = [
-      {
-        title: 'Kode',
-        name: 'kode',
-        nilai: this.state.kode
-      },
       {
         title: 'Nama PO',
         name: 'nama',
@@ -164,6 +160,7 @@ class AgenUpdate extends Component {
         <FormControl variant="filled" className={classes.formControl} fullWidth>
           <InputLabel htmlFor="po_id">PO</InputLabel>
           <Select
+            disabled
             value={this.state.po_id}
             onChange={this.handleChange}
             input={<FilledInput name="po_id" id="po_id" />}>

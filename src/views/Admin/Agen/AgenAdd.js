@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { AddBtn } from 'components/Crud/Btn';
 import AddUpdate from 'components/Crud/AddUpdate';
+import tokenHelpers from 'helpers/tokenHelpers';
 
 const styles = theme => ({
   root: {
@@ -33,15 +34,18 @@ class AgenAdd extends Component {
     labelWidth: 0,
     open: false,
     id: '',
-    kode: '',
     nama: '',
     alamat: '',
     no_hp: '',
     email: '',
-    po_id: '',
+    po_id: this.setPo(),
     data_po: []
   };
 
+  setPo() {
+    const user = tokenHelpers.decodeToken();
+    return user.po;
+  }
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -51,7 +55,6 @@ class AgenAdd extends Component {
   create = () => {
     axios
       .post(`${process.env.REACT_APP_API}/agen`, {
-        kode: this.state.kode,
         nama: this.state.nama,
         alamat: this.state.alamat,
         no_hp: this.state.no_hp,
@@ -62,12 +65,10 @@ class AgenAdd extends Component {
         this.setState({
           open: false,
           id: '',
-          kode: '',
           nama: '',
           alamat: '',
           no_hp: '',
           email: '',
-          po_id: '',
           data_po: []
         });
         this.props.getData();
@@ -87,11 +88,6 @@ class AgenAdd extends Component {
   render() {
     const { classes } = this.props;
     const dataForm = [
-      {
-        title: 'Kode',
-        name: 'kode',
-        nilai: this.state.kode
-      },
       {
         title: 'Nama Agen',
         name: 'nama',
@@ -147,6 +143,7 @@ class AgenAdd extends Component {
             fullWidth>
             <InputLabel htmlFor="po_id">PO</InputLabel>
             <Select
+              disabled
               value={this.state.po_id}
               onChange={this.handleChange}
               input={<FilledInput name="po_id" id="po_id" />}>
