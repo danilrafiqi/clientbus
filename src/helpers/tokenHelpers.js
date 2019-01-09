@@ -12,7 +12,7 @@ const removeToken = () => {
   return localStorage.removeItem('drcreative');
 };
 
-const decodeToken = (token = this.getToken()) => {
+const decodeToken = (token = getToken()) => {
   try {
     if (token) {
       const user = jwtDecode(token);

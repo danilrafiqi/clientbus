@@ -13,14 +13,14 @@ const dashboardRoutes = [
   {
     path: '/admin/dashboard',
     sidebarName: 'Dashboard',
-    navbarName: 'Material Dashboard',
+    navbarName: 'Dashboard',
     icon: Dashboard,
     component: UserProfile
   },
 
   {
     path: '/admin/profile',
-    sidebarName: 'User Profile',
+    sidebarName: 'Profile',
     navbarName: 'Profile',
     icon: Person,
     component: UserProfile

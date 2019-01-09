@@ -16,7 +16,7 @@ import TableHeader from 'components/Crud/TableHeader';
 import Add from './BusAdd';
 import Update from './BusUpdate';
 import Delete from './BusDelete';
-
+import tokenHelpers from 'helpers/tokenHelpers';
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -120,7 +120,8 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   all = () => {
-    Axios.get(`${process.env.REACT_APP_API}/bus`).then(res => {
+    const user = tokenHelpers.decodeToken();
+    Axios.get(`${process.env.REACT_APP_API}/bus/${user.po}/bypo`).then(res => {
       this.setState({
         data: res.data,
         loading: true

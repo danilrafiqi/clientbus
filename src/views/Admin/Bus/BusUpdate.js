@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { UpdateBtn } from 'components/Crud/Btn';
+import tokenHelpers from 'helpers/tokenHelpers';
 
 const styles = theme => ({
   root: {
@@ -29,15 +30,18 @@ const styles = theme => ({
   }
 });
 class AgenAdd extends Component {
-  state = {
-    labelWidth: 0,
-    open: false,
-    id: '',
-    plat: '',
-    jumlah_kursi: '',
-    kelas_id: '',
-    data_kelas: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      labelWidth: 0,
+      open: false,
+      id: '',
+      plat: '',
+      jumlah_kursi: '',
+      kelas_id: '',
+      data_kelas: []
+    };
+  }
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -75,7 +79,9 @@ class AgenAdd extends Component {
       });
   };
   getKelas = () => {
-    axios.get(`${process.env.REACT_APP_API}/kelas/`).then(res => {
+    const user = tokenHelpers.decodeToken();
+
+    axios.get(`${process.env.REACT_APP_API}/kelas/${user.po}`).then(res => {
       this.setState({
         data_kelas: res.data
       });
