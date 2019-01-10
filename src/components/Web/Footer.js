@@ -4,6 +4,7 @@ import bri from 'assets/img/bank/bri.png';
 import bni from 'assets/img/bank/bni.png';
 import mandiri from 'assets/img/bank/mandiri.jpeg';
 import bersama from 'assets/img/bank/bersama.png';
+import { Link } from 'react-router-dom';
 
 class Footer extends Component {
   render() {
@@ -16,16 +17,13 @@ class Footer extends Component {
                 <h6>Bisku.com</h6>
                 <ul className="footer-nav">
                   <li>
-                    <a href="">About</a>
+                    <Link to="/about">About</Link>
                   </li>
                   <li>
-                    <a href="">FAQ</a>
+                    <Link to="/faq">FAQ</Link>
                   </li>
                   <li>
-                    <a href="">Contact Us</a>
-                  </li>
-                  <li>
-                    <a href="">Kareer</a>
+                    <Link to="/contact">Contact Us</Link>
                   </li>
                 </ul>
               </div>
@@ -35,16 +33,16 @@ class Footer extends Component {
                 <h6>Social Media</h6>
                 <ul className="footer-nav">
                   <li>
-                    <a href="">Facebook</a>
+                    <a href="https://facebook.com">Facebook</a>
                   </li>
                   <li>
-                    <a href="">Instragram</a>
+                    <a href="https://instagram.com">Instragram</a>
                   </li>
                   <li>
-                    <a href="">Twitter</a>
+                    <a href="https://twitter.com">Twitter</a>
                   </li>
                   <li>
-                    <a href="">Google +</a>
+                    <a href="https://google.com">Google +</a>
                   </li>
                 </ul>
               </div>
@@ -53,9 +51,9 @@ class Footer extends Component {
               <div className="single-footer-widget">
                 <h6>About</h6>
                 <p>
-                  Bisku merupakan bla bla bla bla bla bla bla bla bla bla bla
-                  bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                  bla bla bla bla bla bla bla bla bla
+                  Bisku adalah situs booking tiket bus, travel, dan shuttle
+                  online terbesar di Indonesia. Kami membantu Anda pesan tiket
+                  dengan lebih cepat, mudah, dan aman
                 </p>
               </div>
             </div>

@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import axios from 'axios';
 import swal from '@sweetalert/with-react';
-import { Link } from 'react-router-dom';
 const styles = theme => ({
   root: {
     width: '100%',
@@ -78,7 +77,7 @@ class Konfirmasi extends Component {
             <p>Tim akan melakukan verifikasi pembayaran</p>
             <p>
               Jika bukti sudah terverifikasi maka anda dapat mencetak tiket
-              melalui link dibawah ini
+              melalui dibawah ini
             </p>
             <a href="/cektiket">
               <Button>Cetak Tiket</Button>
