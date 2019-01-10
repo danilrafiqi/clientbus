@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import Close from '@material-ui/icons/Close';
-import Check from '@material-ui/icons/Check';
-import Warning from '@material-ui/icons/Warning';
 
 // core components
 import GridItem from 'components/Grid/GridItem.jsx';
@@ -50,63 +47,24 @@ class Tiket extends Component {
     datas: []
   };
 
-  setVerified(id) {
-    axios
-      .put(`${process.env.REACT_APP_API}/tiket/${id}`, {
-        status: 'lunas'
-      })
-      .then(() => {
-        this.setNewTiket();
-      });
-  }
-
-  setBooked(id) {
-    axios
-      .put(`${process.env.REACT_APP_API}/tiket/${id}`, {
-        status: 'dipesan'
-      })
-      .then(() => {
-        this.setNewTiket();
-      });
-  }
-
-  setNull(id) {
-    axios
-      .put(`${process.env.REACT_APP_API}/tiket/${id}`, {
-        status: 'kosong'
-      })
-      .then(() => {
-        this.setNewTiket();
-      });
-  }
-
   async setNewTiket() {
-    const datas = await axios.get(`${process.env.REACT_APP_API}/tiket`);
+    const datas = await axios.get(`${process.env.REACT_APP_API}/bukti`);
 
     const arrTable = [];
     await datas.data.map(data => {
       return arrTable.push([
-        data.id,
-        data.no_kursi,
-        data.total,
-        data.status,
-        [
-          <div key={data.id} style={{ whiteSpace: 'nowrap' }}>
-            <Check
-              style={{ color: '#4caf50', cursor: 'pointer' }}
-              onClick={() => this.setVerified(data.id)}
-            />
-
-            <Warning
-              style={{ color: '#ffc107', cursor: 'pointer' }}
-              onClick={() => this.setBooked(data.id)}
-            />
-            <Close
-              style={{ color: 'red', cursor: 'pointer' }}
-              onClick={() => this.setNull(data.id)}
-            />
-          </div>
-        ]
+        data.nama_pengirim,
+        data.nama_bank_pengirim,
+        data.jumlah_transfer,
+        data.tiket_id,
+        <a href={`http://localhost:2018/${data.foto}`}>
+          <img
+            style={{ width: '80px', height: '80px', objectFit: 'cover' }}
+            src={`http://localhost:2018/${data.foto}`}
+            alt={data.foto}
+            title={data.foto}
+          />
+        </a>
       ]);
     });
 
@@ -125,15 +83,19 @@ class Tiket extends Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Tiket</h4>
-              <p className={classes.cardCategoryWhite}>
-                Lakukan Verifikasi Tiket
-              </p>
+              <h4 className={classes.cardTitleWhite}>Bukti</h4>
+              <p className={classes.cardCategoryWhite}>Cek Bukti Pembayaran</p>
             </CardHeader>
             <CardBody>
               <Table
                 tableHeaderColor="primary"
-                tableHead={['Kode Booking', 'No Kursi', 'Total', 'Status']}
+                tableHead={[
+                  'Nama Pengirim',
+                  'Nama Bank Pengirim',
+                  'Jumlah Transfer',
+                  'Kode Booking',
+                  'Foto'
+                ]}
                 tableData={this.state.datas}
               />
             </CardBody>

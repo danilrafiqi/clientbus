@@ -99,7 +99,7 @@ class Add extends Component {
     const { po_id_for_cek } = this.state;
     let userUrl;
     const loginUrl = `${process.env.REACT_APP_API}/login`;
-    if (po_id_for_cek == 'null') {
+    if (po_id_for_cek === 'null') {
       userUrl = `${process.env.REACT_APP_API}/user`;
     } else {
       userUrl = `${process.env.REACT_APP_API}/karyawan-po`;

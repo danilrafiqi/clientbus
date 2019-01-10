@@ -101,10 +101,10 @@ class Add extends Component {
   };
 
   create = () => {
-    const { po_id_for_cek } = this.state;
+    const { hak_akses } = this.state;
     let userUrl;
     const loginUrl = `${process.env.REACT_APP_API}/login`;
-    if (po_id_for_cek == 'null') {
+    if (hak_akses === 'superadmin' || hak_akses === 'manager') {
       userUrl = `${process.env.REACT_APP_API}/user`;
     } else {
       userUrl = `${process.env.REACT_APP_API}/karyawan-po`;

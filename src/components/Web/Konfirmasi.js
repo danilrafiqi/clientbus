@@ -5,7 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import axios from 'axios';
-
+import swal from '@sweetalert/with-react';
+import { Link } from 'react-router-dom';
 const styles = theme => ({
   root: {
     width: '100%',
@@ -63,13 +64,28 @@ class Konfirmasi extends Component {
     data.append('jumlah_transfer', this.state.jumlah_transfer);
 
     axios.post(`${process.env.REACT_APP_API}/bukti`, data).then(res => {
-      this.setState({
-        tiket_id: '',
-        nama_pengirim: '',
-        nama_bank_pengirim: '',
-        jumlah_transfer: '',
-        foto: ''
-      });
+      if (res.data === 'success') {
+        this.setState({
+          tiket_id: '',
+          nama_pengirim: '',
+          nama_bank_pengirim: '',
+          jumlah_transfer: '',
+          foto: ''
+        });
+        swal(
+          <div>
+            <p>Bukti Berhasil di upload</p>
+            <p>Tim akan melakukan verifikasi pembayaran</p>
+            <p>
+              Jika bukti sudah terverifikasi maka anda dapat mencetak tiket
+              melalui link dibawah ini
+            </p>
+            <a href="/cektiket">
+              <Button>Cetak Tiket</Button>
+            </a>
+          </div>
+        );
+      }
     });
   };
   handleSelectedFile = event => {

@@ -16,10 +16,7 @@ import DataKursi from 'components/Web/Booking/Kursi';
 import Review from 'components/Web/Booking/Review';
 import axios from 'axios';
 import uuid from 'uuid/v4';
-
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
-
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   appBar: {
@@ -70,17 +67,6 @@ class Booking extends React.Component {
     no_kursi: 'blm',
     penumpang_id: uuid(),
     book_id: uuid()
-  };
-
-  print = () => {
-    const input = document.getElementById('print');
-    html2canvas(input).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF();
-      pdf.addImage(imgData, 'JPEG', 0, 0);
-      // pdf.output('dataurlnewwindow');
-      pdf.save('download.pdf');
-    });
   };
 
   getStepContent = step => {
@@ -196,9 +182,13 @@ class Booking extends React.Component {
                     Terimakasih telah melakukan pemesanan tiket
                   </Typography>
                   <Typography variant="subtitle1">
+                    {console.log('runnninfskdjskdj')}
                     Kode pemesanan kamu adalah {this.state.book_id}, Simpan kode
                     pemesanan untuk verifikasi tiket di petugas loket. Segera
-                    lakukan pembayaran sebelum jam (...).
+                    lakukan pembayaran melalui daftar bank yang tersedia
+                    <Link to="/metodepembayaran">disini</Link>. Setelah itu
+                    silakan upload bukti transfer{' '}
+                    <Link to="/konfirmasi">Disini</Link>
                   </Typography>
                 </React.Fragment>
               ) : (
@@ -219,7 +209,6 @@ class Booking extends React.Component {
                       onClick={
                         activeStep === steps.length - 1
                           ? async () => {
-                              await this.print();
                               await this.sendPenumpang();
                               await this.bookTiket();
                               this.handleNext();

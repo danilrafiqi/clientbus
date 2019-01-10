@@ -2,6 +2,7 @@
 import Dashboard from '@material-ui/icons/Dashboard';
 import Po from 'views/SuperAdmin/Po/PoList';
 import Tiket from 'views/Petugas/Tiket/Tiket';
+import Bukti from 'views/Petugas/Bukti/Bukti';
 import UserProfile from 'views/Dashboard/UserProfile.jsx';
 import Person from '@material-ui/icons/Person';
 
@@ -21,9 +22,16 @@ const dashboardRoutes = [
     component: UserProfile
   },
   {
+    path: '/petugas/bukti',
+    sidebarName: 'Cek Bukti',
+    navbarName: 'Cek Bukti',
+    icon: Dashboard,
+    component: Bukti
+  },
+  {
     path: '/petugas/tiket',
-    sidebarName: 'Tiket',
-    navbarName: 'Tiket',
+    sidebarName: 'Verifikasi Tiket',
+    navbarName: 'Verifikasi Tiket',
     icon: Dashboard,
     component: Tiket
   },

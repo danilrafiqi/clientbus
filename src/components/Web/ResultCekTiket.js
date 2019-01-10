@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -7,6 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const styles = theme => ({
   listItem: {
@@ -37,10 +40,19 @@ class Review extends React.Component {
   state = {
     datas: []
   };
-
+  print = () => {
+    const input = document.getElementById('print');
+    html2canvas(input).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, 'JPEG', 0, 0);
+      // pdf.output('dataurlnewwindow');
+      pdf.save(`tiket${this.props.match.params.book_id}.pdf`);
+    });
+  };
   getTiket = async () => {
     const datas = await axios.get(
-      `http://localhost:2018/cari/tiket/e6b7c672-0498-4764-86c8-cd8f2dbcfec6`
+      `http://localhost:2018/cari/tiket/${this.props.match.params.book_id}`
     );
     this.setState({
       datas: datas.data[0]
@@ -137,6 +149,7 @@ class Review extends React.Component {
             <span className={classes.total}>{harga}</span>
           </ListItem>
         </List>
+        <Button onClick={this.print}>Print Tiket</Button>
       </React.Fragment>
     );
   }

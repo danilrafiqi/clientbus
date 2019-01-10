@@ -30,28 +30,14 @@ class Header extends Component {
                 </li>
 
                 <li>
-                  <Link to="cari/jadwal">Cari Tiket</Link>
+                  <Link to="/cari/jadwal">Cari Tiket</Link>
                 </li>
 
                 <li>
-                  <Link to="cektiket">Cek Tiket</Link>
-                </li>
-
-                <li className="menu-has-children">
-                  <a href="">Other</a>
-                  <ul>
-                    <li>
-                      <Link to="cari/jadwal">Cari Tiket</Link>
-                    </li>
-                    <li>
-                      <Link to="cektiket">Cek Tiket</Link>
-                    </li>
-                  </ul>
+                  <Link to="/cektiket">Cek Tiket</Link>
                 </li>
                 <li>
-                  <Link className="ticker-btn" to="/auth/signin">
-                    Login
-                  </Link>
+                  <Link to="/auth/signin">Login</Link>
                 </li>
               </ul>
             </nav>
