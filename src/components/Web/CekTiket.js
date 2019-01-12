@@ -35,7 +35,7 @@ class Search extends Component {
                   <div className="col-lg-4 form-cols">
                     <Link
                       className="btn btn-info"
-                      to={`/cektiket/${this.state.id}`}>
+                      to={`/cektiket/?bookId=${this.state.id}`}>
                       <span className="lnr lnr-magnifier" /> Search
                     </Link>
                   </div>

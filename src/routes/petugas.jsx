@@ -8,13 +8,6 @@ import Person from '@material-ui/icons/Person';
 
 const dashboardRoutes = [
   {
-    path: '/petugas/dashboard',
-    sidebarName: 'Po',
-    navbarName: 'Po',
-    icon: Dashboard,
-    component: Po
-  },
-  {
     path: '/petugas/profile',
     sidebarName: 'User Profile',
     navbarName: 'Profile',
@@ -38,7 +31,7 @@ const dashboardRoutes = [
   {
     redirect: true,
     path: '/petugas',
-    to: '/petugas/dashboard',
+    to: '/petugas/profile',
     navbarName: 'Redirect'
   }
 ];

@@ -73,7 +73,10 @@ class App extends React.Component {
       <SearchWrapper
         pemberangkatan={
           <React.Fragment>
-            <label className={classes.label} htmlFor="pemberangkatan">
+            <label
+              className={classes.label}
+              style={{ color: 'white' }}
+              htmlFor="pemberangkatan">
               Pemberangkatan
             </label>
             <Select
@@ -87,7 +90,10 @@ class App extends React.Component {
         }
         pemberhentian={
           <React.Fragment>
-            <label className={classes.label} htmlFor="pemberhentian">
+            <label
+              className={classes.label}
+              style={{ color: 'white' }}
+              htmlFor="pemberhentian">
               Pemberhentian
             </label>
             <Select
@@ -101,7 +107,10 @@ class App extends React.Component {
         }
         tanggal={
           <React.Fragment>
-            <label className={classes.label} htmlFor="pemberhentian">
+            <label
+              className={classes.label}
+              style={{ color: 'white' }}
+              htmlFor="pemberhentian">
               Tanggal
             </label>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>

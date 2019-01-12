@@ -14,14 +14,6 @@ import Karyawan from 'views/Admin/Karyawan/KaryawanList';
 
 const dashboardRoutes = [
   {
-    path: '/admin/dashboard',
-    sidebarName: 'Dashboard',
-    navbarName: 'Dashboard',
-    icon: Dashboard,
-    component: UserProfile
-  },
-
-  {
     path: '/admin/profile',
     sidebarName: 'Profile',
     navbarName: 'Profile',
@@ -94,7 +86,7 @@ const dashboardRoutes = [
   {
     redirect: true,
     path: '/admin',
-    to: '/admin/dashboard',
+    to: '/admin/profile',
     navbarName: 'Redirect'
   }
 ];

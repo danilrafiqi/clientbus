@@ -18,7 +18,7 @@ const styles = theme => ({
   total: {
     fontWeight: '700'
   },
-
+  print: { width: '768px', margin: '0 auto' },
   marginTop: {
     marginTop: '10px'
   },
@@ -38,7 +38,21 @@ const styles = theme => ({
 
 class Review extends React.Component {
   state = {
-    datas: []
+    nama: '',
+    email: '',
+    no_hp: '',
+    no_kursi: '',
+    book_id: '',
+    harga: '',
+    kelas_deskripsi: '',
+    kelas_nama: '',
+    pemberangkatan: '',
+    pemberhentian: '',
+    plat: '',
+    po_nama: '',
+    rute_deskripsi: '',
+    tanggal_keberangkatan: '',
+    isClick: false
   };
   print = () => {
     const input = document.getElementById('print');
@@ -47,20 +61,38 @@ class Review extends React.Component {
       const pdf = new jsPDF();
       pdf.addImage(imgData, 'JPEG', 0, 0);
       // pdf.output('dataurlnewwindow');
-      pdf.save(`tiket${this.props.match.params.book_id}.pdf`);
+      pdf.save(`tiket${''}.pdf`);
     });
   };
-  getTiket = async () => {
-    const datas = await axios.get(
-      `http://localhost:2018/cari/tiket/${this.props.match.params.book_id}`
-    );
+  getTiket = async args => {
+    const datas = await axios.get(`http://localhost:2018/cari/tiket/${args}`);
+    if (datas.data.length !== 0) {
+      this.setState({
+        nama: datas.data[0].nama,
+        email: datas.data[0].email,
+        no_hp: datas.data[0].no_hp,
+        no_kursi: datas.data[0].no_kursi,
+        book_id: datas.data[0].book_id,
+        harga: datas.data[0].harga,
+        kelas_deskripsi: datas.data[0].kelas_deskripsi,
+        kelas_nama: datas.data[0].kelas_nama,
+        pemberangkatan: datas.data[0].pemberangkatan,
+        pemberhentian: datas.data[0].pemberhentian,
+        plat: datas.data[0].plat,
+        po_nama: datas.data[0].po_nama,
+        rute_deskripsi: datas.data[0].rute_deskripsi,
+        tanggal_keberangkatan: datas.data[0].tanggal_keberangkatan
+      });
+    }
+
     this.setState({
-      datas: datas.data[0]
+      isClick: true
     });
   };
 
   componentWillReceiveProps(nextProps) {
-    this.getTiket();
+    console.log('nprops', nextProps);
+    this.getTiket(nextProps.location.search);
   }
 
   render() {
@@ -80,76 +112,90 @@ class Review extends React.Component {
       po_nama,
       rute_deskripsi,
       tanggal_keberangkatan
-    } = this.state.datas;
+    } = this.state;
 
     return (
       <React.Fragment>
-        <Grid container spacing={16} id="print">
-          <Grid item xs={12} sm={6}>
-            <p className={classes.title}>Kode Booking</p>
-            <p className={classes.subtitle}>{book_id}</p>
-          </Grid>
-          <Grid item container xs={12} className={classes.marginTop}>
-            <Grid item xs={12} sm={6}>
-              <p className={classes.title}>{po_nama}</p>
-              <p className={classes.subtitle}>{kelas_nama}</p>
-            </Grid>
+        {this.state.isClick ? (
+          this.state.nama.length === 0 ? (
+            <h1 style={{ textAlign: 'center' }}>Tiket belum diverifikasi</h1>
+          ) : (
+            <Grid container spacing={16} id="print" className={classes.print}>
+              <Grid item xs={12} sm={6}>
+                <p className={classes.title}>Kode Booking</p>
+                <p className={classes.subtitle}>{book_id}</p>
+              </Grid>
+              <Grid item container xs={12} className={classes.marginTop}>
+                <Grid item xs={12} sm={6}>
+                  <p className={classes.title}>{po_nama}</p>
+                  <p className={classes.subtitle}>{kelas_nama}</p>
+                </Grid>
 
-            <Grid item xs={12} sm={6}>
-              <p className={classes.title}>{plat}</p>
-              <p className={classes.subtitle}>No Kursi : {no_kursi}</p>
-            </Grid>
-          </Grid>
+                <Grid item xs={12} sm={6}>
+                  <p className={classes.title}>{plat}</p>
+                  <p className={classes.subtitle}>No Kursi : {no_kursi}</p>
+                </Grid>
+              </Grid>
 
-          <Grid item xs={12} sm={12} className={classes.marginTop}>
-            <p className={classes.title}>Fasilitas</p>
-            <p className={classes.subtitle}>{kelas_deskripsi}</p>
-          </Grid>
+              <Grid item xs={12} sm={12} className={classes.marginTop}>
+                <p className={classes.title}>Fasilitas</p>
+                <p className={classes.subtitle}>{kelas_deskripsi}</p>
+              </Grid>
 
-          <Grid item container className={classes.marginTop}>
-            <Grid item xs={12} sm={6}>
-              <p className={classes.title}>Pemberangkatan</p>
-              <p className={classes.subtitle}>{pemberangkatan}</p>
-              <p className={classes.subtitle}>
-                {moment(tanggal_keberangkatan).format('YYYY-MM-DD HH:mm:ss')}
-              </p>
-            </Grid>
+              <Grid item container className={classes.marginTop}>
+                <Grid item xs={12} sm={6}>
+                  <p className={classes.title}>Pemberangkatan</p>
+                  <p className={classes.subtitle}>{pemberangkatan}</p>
+                  <p className={classes.subtitle}>
+                    {moment(tanggal_keberangkatan).format(
+                      'YYYY-MM-DD HH:mm:ss'
+                    )}
+                  </p>
+                </Grid>
 
-            <Grid item xs={12} sm={6}>
-              <p className={classes.title}>Pemberhentian</p>
-              <p className={classes.subtitle}>{pemberhentian}</p>
-            </Grid>
-          </Grid>
+                <Grid item xs={12} sm={6}>
+                  <p className={classes.title}>Pemberhentian</p>
+                  <p className={classes.subtitle}>{pemberhentian}</p>
+                </Grid>
+              </Grid>
 
-          <Grid item xs={12} sm={12} className={classes.marginTop}>
-            <p className={classes.title}>Via</p>
-            <p className={classes.subtitle}>{rute_deskripsi}</p>
-          </Grid>
+              <Grid item xs={12} sm={12} className={classes.marginTop}>
+                <p className={classes.title}>Via</p>
+                <p className={classes.subtitle}>{rute_deskripsi}</p>
+              </Grid>
 
-          <Grid item container xs={12} sm={12} className={classes.marginTop}>
-            <Grid item xs={12} sm={12}>
-              <p className={classes.title}>Detail Penumpang</p>
+              <Grid
+                item
+                container
+                xs={12}
+                sm={12}
+                className={classes.marginTop}>
+                <Grid item xs={12} sm={12}>
+                  <p className={classes.title}>Detail Penumpang</p>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <p className={classes.subtitle}>{nama}</p>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <p className={classes.subtitle}>{email}</p>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <p className={classes.subtitle}>{no_hp}</p>
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12} sm={12}>
+                <List disablePadding>
+                  <ListItem className={classes.listItem}>
+                    <ListItemText primary="Total" />
+                    <span className={classes.total}>{harga}</span>
+                  </ListItem>
+                </List>
+                <Button onClick={this.print}>Print Tiket</Button>
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <p className={classes.subtitle}>{nama}</p>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <p className={classes.subtitle}>{email}</p>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <p className={classes.subtitle}>{no_hp}</p>
-            </Grid>
-          </Grid>
-        </Grid>
-        <br />
-        <br />
-        <List disablePadding>
-          <ListItem className={classes.listItem}>
-            <ListItemText primary="Total" />
-            <span className={classes.total}>{harga}</span>
-          </ListItem>
-        </List>
-        <Button onClick={this.print}>Print Tiket</Button>
+          )
+        ) : null}
       </React.Fragment>
     );
   }

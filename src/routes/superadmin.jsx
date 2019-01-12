@@ -16,13 +16,6 @@ import ChangePassword from 'views/Dashboard/ChangePassword';
 
 const dashboardRoutes = [
   {
-    path: '/superadmin/dashboard',
-    sidebarName: 'Dashboard',
-    navbarName: 'Dashboard',
-    icon: Dashboard,
-    component: DashboardPage
-  },
-  {
     path: '/superadmin/profile',
     sidebarName: 'Profile',
     navbarName: 'Profile',
@@ -74,7 +67,7 @@ const dashboardRoutes = [
   {
     redirect: true,
     path: '/superadmin',
-    to: '/superadmin/dashboard',
+    to: '/superadmin/profile',
     navbarName: 'Redirect'
   }
 ];

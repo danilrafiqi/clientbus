@@ -128,7 +128,7 @@ class Dashboard extends React.Component {
                 <CardIcon color="success">
                   <Store />
                 </CardIcon>
-                <p className={classes.cardCategory}>Jumlah PO</p>
+                <p className={classes.cardCategory}>Jumlah Agen</p>
                 <h3 className={classes.cardTitle}>{agen}</h3>
               </CardHeader>
               <CardFooter stats>
@@ -189,14 +189,13 @@ class Dashboard extends React.Component {
                 />
               </CardHeader>
               <CardBody>
-                <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-                <p className={classes.cardCategory}>
-                  Last Campaign Performance
-                </p>
+                <h4 className={classes.cardTitle}>
+                  Jumlah Pendapatan Berdasarkan Bulan
+                </h4>
               </CardBody>
               <CardFooter chart>
                 <div className={classes.stats}>
-                  <AccessTime /> campaign sent 2 days ago
+                  <AccessTime /> Selama 2019
                 </div>
               </CardFooter>
             </Card>

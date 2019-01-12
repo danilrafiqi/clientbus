@@ -21,7 +21,7 @@ class CekTiket extends Component {
           <div className="container">
             <div className="row justify-content-center d-flex">
               <div className="col-lg-12">
-                <Result />
+                <Result rprops={this.props} />
               </div>
             </div>
           </div>

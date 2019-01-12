@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import axios from 'axios';
 import swal from '@sweetalert/with-react';
+import konfir from 'assets/img/konfirmasi.png';
 const styles = theme => ({
   root: {
     width: '100%',
@@ -158,11 +159,7 @@ class Konfirmasi extends Component {
           </Grid>
           <Grid item xs={12} sm={6}>
             <div className={classes.imgWrap}>
-              <img
-                className={classes.image}
-                src="https://d374lxn0zq4jnw.cloudfront.net/images/Konfirmasi_Pembayaran.png"
-                alt="as"
-              />
+              <img className={classes.image} src={konfir} alt="as" />
             </div>
           </Grid>
         </Grid>

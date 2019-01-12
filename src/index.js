@@ -26,8 +26,7 @@ ReactDOM.render(
       <Route path="/cari/jadwal" component={CariJadwal} />
       <Route path="/booking/:id/:tanggal/:plat" component={Booking} />
       <Route path="/konfirmasi" component={Konfirmasi} />
-      <Route path="/cektiket/" component={CekTiket} exact />
-      <Route path="/cektiket/:book_id" component={CekTiket} />
+      <Route path="/cektiket" component={CekTiket} />
       <Route path="/auth/signin" component={SignIn} />
       <Route path="/metodepembayaran" component={MetodePembayaran} />
       <Route path="/" component={Home} exact />
