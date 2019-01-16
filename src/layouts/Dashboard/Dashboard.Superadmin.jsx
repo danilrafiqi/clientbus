@@ -79,7 +79,7 @@ class App extends React.Component {
       <AuthenticatedSuperAdmin className={classes.wrapper}>
         <Sidebar
           routes={superadminRoutes}
-          logoText={'DRCreative'}
+          logoText={'Bisku.com'}
           logo={logo}
           image={image}
           handleDrawerToggle={this.handleDrawerToggle}

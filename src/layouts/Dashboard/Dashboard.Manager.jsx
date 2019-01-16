@@ -72,7 +72,7 @@ class App extends React.Component {
       <AuthenticatedManager className={classes.wrapper}>
         <Sidebar
           routes={routes}
-          logoText={'Bisku'}
+          logoText={'Bisku.com'}
           logo={logo}
           image={image}
           handleDrawerToggle={this.handleDrawerToggle}

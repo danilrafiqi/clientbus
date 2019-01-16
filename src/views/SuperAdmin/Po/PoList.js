@@ -139,12 +139,6 @@ class EnhancedTable extends React.Component {
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
     const rows = [
       {
-        id: 'kode',
-        numeric: false,
-        disablePadding: false,
-        label: 'Kode'
-      },
-      {
         id: 'nama',
         numeric: false,
         disablePadding: false,
@@ -208,7 +202,6 @@ class EnhancedTable extends React.Component {
                       <TableCell padding="checkbox">
                         <Checkbox checked={isSelected} />
                       </TableCell>
-                      <TableCell>{n.kode}</TableCell>
                       <TableCell>{n.nama}</TableCell>
                       <TableCell>{n.alamat}</TableCell>
                       <TableCell>{n.no_hp}</TableCell>

@@ -72,7 +72,7 @@ class App extends React.Component {
       <AuthenticatedPetugas className={classes.wrapper}>
         <Sidebar
           routes={petugasRoutes}
-          logoText={'DRCreative'}
+          logoText={'Bisku.com'}
           logo={logo}
           image={image}
           handleDrawerToggle={this.handleDrawerToggle}
