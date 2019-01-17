@@ -63,7 +63,6 @@ class SignIn extends Component {
       password: this.state.password
     };
     axios.post(`${process.env.REACT_APP_API}/auth/signin`, data).then(res => {
-      console.log('dadada', res);
       if (res.data === 'unauthorized') {
         swal(
           <div>

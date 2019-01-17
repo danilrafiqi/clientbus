@@ -42,7 +42,9 @@ class App extends React.Component {
   };
 
   getKabupaten = async () => {
-    let suggestions = await axios.get(`http://localhost:2018/cari/kabupaten`);
+    let suggestions = await axios.get(
+      `${process.env.REACT_APP_API}/cari/kabupaten`
+    );
     this.setState({
       options: suggestions.data.map(suggestion => ({
         value: suggestion.name,

@@ -27,7 +27,7 @@ class Pembayaran extends Component {
     datas: []
   };
   getBank = () => {
-    axios.get(`http://localhost:2018/bank`).then(res => {
+    axios.get(`${process.env.REACT_APP_API}/bank`).then(res => {
       this.setState({ datas: res.data });
     });
   };

@@ -45,8 +45,6 @@ class Summary extends Component {
     } = this.props.data;
     return (
       <div style={styles.listWrapper}>
-        {console.log('ttt', this.props)}
-
         <div style={styles.title}>
           <div style={styles.titleBold}>{po_nama}</div>
           <div style={styles.titleDesc}>{kelas_nama}</div>
@@ -125,14 +123,12 @@ class ResultSearch extends Component {
 
   getTiket = async arg => {
     try {
-      const datas = await axios.get(`http://localhost:2018/cari/jadwal${arg}`);
+      const datas = await axios.get(
+        `${process.env.REACT_APP_API}/cari/jadwal${arg}`
+      );
       this.setState({
         data: datas.data
       });
-      console.log(
-        'gettiket runn',
-        `http://localhost:2018/cari/jadwal${this.props.rprop.location.search}`
-      );
     } catch (err) {
       throw err;
     }
@@ -140,13 +136,8 @@ class ResultSearch extends Component {
   componentDidMount() {
     this.getTiket(this.props.rprop.location.search);
   }
-  componentDidUpdate() {
-    console.log('cdu', this.props.rprop);
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log('nextp', nextProps);
-    console.log('cwrp', this.props.rprop);
 
+  componentWillReceiveProps(nextProps) {
     this.getTiket(nextProps.rprop.location.search);
   }
   render() {

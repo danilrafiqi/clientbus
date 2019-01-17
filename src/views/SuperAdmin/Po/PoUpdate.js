@@ -46,7 +46,6 @@ class AgenAdd extends Component {
     axios.get(`${process.env.REACT_APP_API}/po/${id}`).then(res => {
       this.setState({
         open: true,
-        kode: res.data[0].kode,
         nama: res.data[0].nama,
         alamat: res.data[0].alamat,
         no_hp: res.data[0].no_hp,
@@ -57,7 +56,6 @@ class AgenAdd extends Component {
   update = id => {
     axios
       .put(`${process.env.REACT_APP_API}/po/${id}`, {
-        kode: this.state.kode,
         nama: this.state.nama,
         alamat: this.state.alamat,
         no_hp: this.state.no_hp,
@@ -79,11 +77,6 @@ class AgenAdd extends Component {
   render() {
     const { classes } = this.props;
     const dataForm = [
-      {
-        title: 'Kode',
-        name: 'kode',
-        nilai: this.state.kode
-      },
       {
         title: 'Nama PO',
         name: 'nama',

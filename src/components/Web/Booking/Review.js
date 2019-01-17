@@ -40,7 +40,7 @@ class Review extends React.Component {
 
   async componentWillMount() {
     const datas = await axios.get(
-      `http://localhost:2018/cari/jadwal/${this.props.match.params.id}`
+      `${process.env.REACT_APP_API}/cari/jadwal/${this.props.match.params.id}`
     );
     this.setState({
       datas: datas.data[0]

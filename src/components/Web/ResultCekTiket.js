@@ -65,7 +65,9 @@ class Review extends React.Component {
     });
   };
   getTiket = async args => {
-    const datas = await axios.get(`http://localhost:2018/cari/tiket/${args}`);
+    const datas = await axios.get(
+      `${process.env.REACT_APP_API}/cari/tiket/${args}`
+    );
     if (datas.data.length !== 0) {
       this.setState({
         nama: datas.data[0].nama,

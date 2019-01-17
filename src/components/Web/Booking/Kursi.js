@@ -39,13 +39,13 @@ class Kursi extends Component {
     let cek;
     const data = [];
     const kursi = await axios.get(
-      `http://localhost:2018/cari/kursi/${this.props.match.params.id}/${
+      `${process.env.REACT_APP_API}/cari/kursi/${this.props.match.params.id}/${
         this.props.match.params.tanggal
       }`
     );
 
     const jumlah_kursi = await axios.get(
-      `http://localhost:2018/bus/plat/${this.props.match.params.plat}`
+      `${process.env.REACT_APP_API}/bus/plat/${this.props.match.params.plat}`
     );
     const get_kursi_dipesan = () => {
       const temp = [];
@@ -71,7 +71,9 @@ class Kursi extends Component {
   };
   getTiket = async arg => {
     try {
-      const datas = await axios.get(`http://localhost:2018/cari/jadwal${arg}`);
+      const datas = await axios.get(
+        `${process.env.REACT_APP_API}/cari/jadwal${arg}`
+      );
       this.setState({
         data: datas.data
       });

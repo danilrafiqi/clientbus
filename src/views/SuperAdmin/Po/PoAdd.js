@@ -66,11 +66,6 @@ class AgenAdd extends Component {
     const { classes } = this.props;
     const dataForm = [
       {
-        title: 'Kode',
-        name: 'kode',
-        nilai: this.state.kode
-      },
-      {
         title: 'Nama PO',
         name: 'nama',
         nilai: this.state.nama

@@ -151,18 +151,7 @@ class Booking extends React.Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        {console.log(
-          'state',
-          this.state.nama,
-          this.state.email,
-          this.state.no_hp,
-          this.state.no_kursi,
-          this.state.penumpang_id,
-          this.state.harga,
-          this.props,
-          'bookid',
-          this.state.book_id
-        )}
+
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">

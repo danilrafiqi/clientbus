@@ -57,10 +57,10 @@ class Tiket extends Component {
         data.nama_bank_pengirim,
         data.jumlah_transfer,
         data.tiket_id,
-        <a href={`http://localhost:2018/${data.foto}`}>
+        <a href={`${process.env.REACT_APP_API}/${data.foto}`}>
           <img
             style={{ width: '80px', height: '80px', objectFit: 'cover' }}
-            src={`http://localhost:2018/${data.foto}`}
+            src={`${process.env.REACT_APP_API}/${data.foto}`}
             alt={data.foto}
             title={data.foto}
           />
