@@ -106,10 +106,6 @@ class Detail extends Component {
             <td>Jumlah Kursi</td>
             <td>{jumlah_kursi}</td>
           </tr>
-          <tr>
-            <td>Kursi Tersedia</td>
-            <td>{kursi_tersedia}</td>
-          </tr>
         </tbody>
       </table>
     );
@@ -126,6 +122,7 @@ class ResultSearch extends Component {
       const datas = await axios.get(
         `${process.env.REACT_APP_API}/cari/jadwal${arg}`
       );
+      console.log('runn', datas);
       this.setState({
         data: datas.data
       });
@@ -133,12 +130,17 @@ class ResultSearch extends Component {
       throw err;
     }
   };
-  componentDidMount() {
-    this.getTiket(this.props.rprop.location.search);
-  }
+  // componentDidMount() {
+  //   console.log('runcdm');
+  //   this.getTiket(this.props.rprop.location.search);
+  // }
 
   componentWillReceiveProps(nextProps) {
-    this.getTiket(nextProps.rprop.location.search);
+    console.log('run', nextProps);
+    if (nextProps.rprop.location.search !== '') {
+      console.log('thiss', this.getTiket());
+      this.getTiket(nextProps.rprop.location.search);
+    }
   }
   render() {
     return this.state.data.map((datas, index) => {
